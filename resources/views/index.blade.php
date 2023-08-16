@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,55 +39,82 @@
             <h2 class="mt-2 sm:mt-6 text-2xl sm:text-3xl font-bold text-gray-900 text-center">CHDPU - Talabalar Turar Joyiga Online Ariza To'ldirish</h2>
         </div>
         <div class="mt-6 bg-white/80 p-6 sm:p-10 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
-          <form action="#" method="post" autocomplete="off" class="space-y-6">
+          <form action="{{ route('kelgan_arizalar_store')}}" method="POST" autocomplete="off" class="space-y-6">
+            @csrf 
+            @method('post')   
+
+            @if (count($errors) > 0)
+  <div class="text-red-600">
+    <ul>
+      @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">F.I.SH</label>
+                <label for="name" class="block text-sm font-medium @if($errors->has('name')) text-red-700 @else text-gray-700 @endif">F.I.SH</label>
                 <div class="relative rounded-md shadow-sm mt-1">
                     <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
-                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <svg class="h-5 w-5 @if($errors->has('name')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                         </svg>                              
                     </div>
-                    <input type="text" id="name" name="name" required class="w-full pl-10 border-gray-300 rounded-md
-                      focus:border-green-500 focus:ring-green-500 text-sm" placeholder="Talabaning F.I.SH"></input>
+                    <input type="text" id="name" name="name" required class="w-full pl-10 rounded-md text-sm @if($errors->has('name')) border-red-300
+                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Talabaning F.I.SH">
                 </div>
+                @if($errors->has('name'))
+                  <p class="mt-2 text-sm text-red-600">
+                    @error('name'){{ $message }}@enderror
+                  </p>
+                @endif
             </div>
             <div>
-                <label for="passport_info" class="block text-sm font-medium text-gray-700">Passport ma'lumotlaringiz</label>
+                <label for="passport_info" class="block text-sm font-medium @if($errors->has('pass_info')) text-red-700 @else text-gray-700 @endif">Passport ma'lumotlaringiz</label>
                 <div class="relative rounded-md shadow-sm mt-1">
                     <div class="absolute inset-y-0 flex  items-center left-0 pl-3">                      
-                      <svg  class="h-5 w-5 text-gray-400"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                      <svg  class="h-5 w-5 @if($errors->has('pass_info')) text-red-400 @else text-gray-400 @endif"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z" clip-rule="evenodd" />
                       </svg>                       
                     </div>
-                    <input type="text" id="passport_info" name="passport_info" class="w-full pl-10 border-gray-300 rounded-md
-                      focus:border-green-500 focus:ring-green-500 text-sm" placeholder="Talabaning passport Seryasi va raqami"></input>
+                    <input type="text" id="passport_info" name="pass_info" class="w-full pl-10 rounded-md text-sm @if($errors->has('pass_info')) border-red-300
+                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Talabaning passport Seryasi va raqami">
                 </div>
+                @if($errors->has('pass_info'))
+                  <p class="mt-2 text-sm text-red-600">
+                    @error('pass_info'){{ $message }}@enderror
+                  </p>
+                @endif
             </div>
             <div>
-              <label for="phone_number" class="block text-sm font-medium text-gray-700">Bog'lanish uchun telefon raqamiz (shaxsiy)</label>
+              <label for="phone_number" class="block text-sm font-medium @if($errors->has('telefon')) text-red-700 @else text-gray-700 @endif">Bog'lanish uchun telefon raqamiz (shaxsiy)</label>
               <div class="relative rounded-md shadow-sm mt-1">
                   <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
-                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg class="h-5 w-5 @if($errors->has('telefon')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path fill-rule="evenodd" d="M19.5 9.75a.75.75 0 01-.75.75h-4.5a.75.75 0 01-.75-.75v-4.5a.75.75 0 011.5 0v2.69l4.72-4.72a.75.75 0 111.06 1.06L16.06 9h2.69a.75.75 0 01.75.75z" clip-rule="evenodd" />
                       <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />uni
                     </svg>                    
                   </div>
-                  <input type="number" id="phone_number" name="phone_number" class="w-full pl-10 border-gray-300 rounded-md
-                    focus:border-green-500 focus:ring-green-500 text-sm" placeholder="+998(00-000-0000)"></input>
+                  <input type="number" id="phone_number" name="telefon" class="w-full pl-10 rounded-md text-sm @if($errors->has('telefon')) border-red-300
+                  focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="+998(00-000-0000)">
               </div>
+              @if($errors->has('telefon'))
+                <p class="mt-2 text-sm text-red-600">
+                  @error('telefon'){{ $message }}@enderror
+                </p>
+              @endif
           </div>
 
           <div>
-            <label for="fakultetlar" class="block text-sm font-medium text-gray-700">Tahsil olayotgan fakultetingiz</label>
+            <label for="fakultetlar" class="block text-sm font-medium @if($errors->has('fakultet')) text-red-700 @else text-gray-700 @endif">Tahsil olayotgan fakultetingiz</label>
             <div class="relative rounded-md shadow-sm mt-1">
                 <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
-                  <svg  class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <svg  class="h-5 w-5 @if($errors->has('fakultet')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                   </svg>     
                 </div>
-                  <select id="fakultetlar" name="fakultetlar" class="w-full pl-10 border-gray-300 rounded-md
-                  focus:border-green-500 focus:ring-green-500 text-sm normal-case">
+                  <select id="fakultetlar" name="fakultet" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('fakultet')) border-red-300
+                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
                     <option value="none" selected>Fakultet nomini tanlang</option>
                     <option value="gumanitar">Gumanitar fanlar fakulteti</option>
                     <option value="pedagogika">Pedagogika fakulteti</option>
@@ -101,34 +128,44 @@
                     <option value="sanatshunoslik">San'atshunoslik fakulteti</option>
                   </select>
             </div>
+            @if($errors->has('fakultet'))
+              <p class="mt-2 text-sm text-red-600">
+                @error('fakultet'){{ $message }}@enderror
+              </p>
+            @endif
         </div>
 
         <div>
-          <label for="department" class="block text-sm font-medium text-gray-700">Tahsil olayotgan yo'nalishingiz</label>
+          <label for="department" class="block text-sm font-medium @if($errors->has('yonalish')) text-red-700 @else text-gray-700 @endif">Tahsil olayotgan yo'nalishingiz</label>
           <div class="relative rounded-md shadow-sm mt-1">
               <div class="absolute inset-y-0 flex  items-center left-0 pl-3">                
-                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <svg class="h-5 w-5  @if($errors->has('yonalish')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                 </svg>
                 
               </div>
-                <select id="department" class="w-full pl-10 border-gray-300 rounded-md
-                focus:border-green-500 focus:ring-green-500 text-sm normal-case">
+                <select id="department" name="yonalish" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('yonalish')) border-red-300
+                  focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
                   <option selected>Yo'nalish nomini tanlang</option>                 
                 </select>
           </div>
+          @if($errors->has('yonalish'))
+            <p class="mt-2 text-sm text-red-600">
+              @error('yonalish'){{ $message }}@enderror
+            </p>
+          @endif
       </div>
 
       <div>
-        <label for="kurs" class="block text-sm font-medium text-gray-700">Tahsil olayotgan bosqichingiz</label>
+        <label for="kurs" class="block text-sm font-medium @if($errors->has('kurs_nomeri')) text-red-700 @else text-gray-700 @endif">Tahsil olayotgan bosqichingiz</label>
         <div class="relative rounded-md shadow-sm mt-1">
             <div class="absolute inset-y-0 flex  items-center left-0 pl-3">            
-              <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <svg class="h-5 w-5 @if($errors->has('kurs_nomeri')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
               </svg>                  
             </div>
-              <select id="kurs" name="kurs" class="w-full pl-10 border-gray-300 rounded-md
-              focus:border-green-500 focus:ring-green-500 text-sm normal-case">
+              <select id="kurs" name="kurs_nomeri" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('kurs_nomeri')) border-red-300
+                focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
                 <option selected>Kursingizni tanlang</option>
                 <option value="1-kurs">1-Kurs</option>
                 <option value="2-kurs">2-Kurs</option>
@@ -137,19 +174,29 @@
                 <option value="5-kurs">5-Kurs</option>                      
               </select>
           </div>
+          @if($errors->has('kurs_nomeri'))
+            <p class="mt-2 text-sm text-red-600">
+              @error('kurs_nomeri'){{ $message }}@enderror
+            </p>
+          @endif
       </div>
       <div>
-        <label for="guruh" class="block text-sm font-medium text-gray-700">Tahsil olayotgan guruhingiz</label>
+        <label for="guruh" class="block text-sm font-medium @if($errors->has('guruhi')) text-red-700 @else text-gray-700 @endif">Tahsil olayotgan guruhingiz</label>
         <div class="relative rounded-md shadow-sm mt-1">
             <div class="absolute inset-y-0 flex  items-center left-0 pl-3">              
-                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <svg class="h-5 w-5 @if($errors->has('guruhi')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                 </svg>
                                             
             </div>
-            <input type="text" id="guruh" name="guruh" required class="w-full pl-10 border-gray-300 rounded-md
-              focus:border-green-500 focus:ring-green-500 text-sm" placeholder="Tahsil olayotgan guruhingizni yozing"></input>
+            <input type="text" id="guruh" name="guruhi" required class="w-full pl-10 rounded-md text-sm @if($errors->has('guruhi')) border-red-300
+            focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Tahsil olayotgan guruhingizni yozing">
           </div>
+          @if($errors->has('guruhi'))
+            <p class="mt-2 text-sm text-red-600">
+              @error('guruhi'){{ $message }}@enderror
+            </p>
+          @endif
       </div>
 
       <div>
@@ -158,37 +205,42 @@
             <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
               <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                   <div class="flex items-center pl-3">
-                      <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" value="mehribonlik_uylari_tarbiyalanuvchilari" name="tanlash_qismi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" value="mehribonlik_uylari_tarbiyalanuvchilari" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="mehribonlik_uylari_tarbiyalanuvchilari" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                   <div class="flex items-center pl-3">
-                      <input id="chin_yetimlar" type="radio" value="chin_yetimlar" name="tanlash_qismi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="chin_yetimlar" type="radio" value="chin_yetimlar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="chin_yetimlar" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                   <div class="flex items-center pl-3">
-                      <input id="nogironligi_bor" type="radio" value="nogironligi_bor" name="tanlash_qismi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="nogironligi_bor" type="radio" value="nogironligi_bor" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="nogironligi_bor" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I va II-guruh nogironligi bo‘lgan shaxslar</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                   <div class="flex items-center pl-3">
-                      <input id="ijtimoiy_himoya" type="radio" value="ijtimoiy_himoya" name="tanlash_qismi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="ijtimoiy_himoya" type="radio" value="ijtimoiy_himoya" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="ijtimoiy_himoya" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">“Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                 <div class="flex items-center pl-3">
-                    <input id="uzoq_viloyatdagi_talabalar" type="radio" value="uzoq_viloyatdagi_talabalar" name="tanlash_qismi" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <input id="uzoq_viloyatdagi_talabalar" type="radio" value="uzoq_viloyatdagi_talabalar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                     <label for="uzoq_viloyatdagi_talabalar" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)</label>
                 </div>
             </li>
           </ul>
           
         </div>
+        @if($errors->has('mezon'))
+          <p class="mt-2 text-sm text-red-600">
+            @error('mezon'){{ $message }}@enderror
+          </p>
+        @endif
       </div>
 
       <div>
@@ -211,23 +263,27 @@
                   <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"><span class="font-semibold">Bu yerga bosib</span> fayl yuklang</p>
                   <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG, PDF, WORD (MAX. 5MB)</p>
               </div>
-              <input id="dropzone-file" type="file" class="hidden" />
+              <input id="dropzone-file" type="file" name="files" class="hidden" />
           </label>
       </div>
       <div class="mb-7 ml-4">
         <div class="flex items-center">
           <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-          <label for="link-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Barcha ma'lumotlaringiz to'grimi? <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Bir qayta ko'rish</a>.</label>
+          <label for="link-checkbox"  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Barcha ma'lumotlaringiz to'grimi? <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Bir qayta ko'rish</a>.</label>
         </div>
       </div>                    
           <div>
-            <a
+            <!-- <a
             href="#"
             class="justify-center items-center flex rounded-md bg-green-600 py-2 px-4 text-white font-semibold shadow-lg hover:shadow-xl 
               focus:shadow-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 
               focus:ring-offset-2 transition duration-150 ease-in-out"
-            >Jo'natish</a>
+            >Jo'natish</a> -->
+            <button class="w-full justify-center items-center flex rounded-md bg-green-600 py-2 px-4 text-white font-semibold shadow-lg hover:shadow-xl 
+              focus:shadow-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 
+              focus:ring-offset-2 transition duration-150 ease-in-out opacity-50" id="submit-button" disabled type="submit">Jo'natish</button>
           </div>
+
      
           </form>
           <div class="flex relative justify-center items-center mt-6">
@@ -245,16 +301,16 @@
     <script>
        var departments = {
               "none": ["Yo'nalish nomini tanlang"],
-              "fizika": ['Fizika kafedrasi', 'Kimyo kafedrasi', "Fizika va astronomiya o'qitish metodikasi kafedrasi", "Ilmiy va metodologik kimyo kafedrasi"],
-              "matematika": ['Informatika va axborot texnoligiyalari kafedrasi', 'Algebra va matematik analiz kafedrasi', "Matematika o'qitish metodikasi va geometriya kafedrasi", "Informatika o'qitish metodikasi kafedrasi"],
-              "tabiiy": ['Biologiya kafedrasi', 'Geografiya kafedrasi', 'Genetika va evolutsion biologiya kafedrasi'],
-              "gumanitar": ["O'zbek tilshunosligi kafedrasi", "O‘zbek adabiyotshunosligi kafedrasi", 'Fakultetlararo rus tili kafedrasi', "Rus adabiyoti va ta'lim metodikasi kafedrasi", "Fakultetlar aro Ijtimoiy fanlar kafedrasi", "O'zbekiston tarixi kafedrasi", "Jahon tarixi kafedrasi", "Milliy g’oya, ma’naviyat asoslari va huquq ta’limi kafedrasi", "Rus tili va ta'lim metodikasi kafedrasi"],
-              "pedagogika": ['Pedagogika kafedrasi', 'Maktab menejmenti kafedrasi', 'Psixologiya kafedrasi', "Umumiy pedagogika kafedrasi", "Maxsus pedagogika kafedrasi"],
-              "maktabgacha": ['Maktabgacha ta’lim metodikasi kafedrasi', 'Bolalar sporti kafedrasi'],
-              "boshlangich": ["Boshlang'ich ta'lim nazariyasi", "Boshlangʻich taʻlim metodikasi kafedrasi"],
-              "turizm": ['Umumkasbiy va ihtisoslik fanlari kafedrasi', 'Ingliz tili kafedrasi', 'Nemis tili kafedrasi', 'Fakultetlararo chet tillar kafedrasi'],
-              "sport": ["Texnologik talim kafedrasi", "Jismoniy madaniyat metodikasi kafedrasi", "Jismoniy madaniyat nazariyasi"],
-              "sanatshunoslik": ["Tasviriy san’at va dizayn kafedrasi", "Muhandislik va kompyuter grafikasi kafedrasi", "Musiqa kafedrasi"],
+              "fizika": ['Fizika yo\'nalishi', 'Kimyo yo\'nalishi', "Fizika va astronomiya o'qitish metodikasi yo\'nalishi", "Ilmiy va metodologik kimyo yo\'nalishi"],
+              "matematika": ['Informatika va axborot texnoligiyalari yo\'nalishi', 'Algebra va matematik analiz yo\'nalishi', "Matematika o'qitish metodikasi va geometriya yo\'nalishi", "Informatika o'qitish metodikasi yo\'nalishi"],
+              "tabiiy": ['Biologiya yo\'nalishi', 'Geografiya yo\'nalishi', 'Genetika va evolutsion biologiya yo\'nalishi'],
+              "gumanitar": ["O'zbek tilshunosligi yo\'nalishi", "O‘zbek adabiyotshunosligi yo\'nalishi", 'Fakultetlararo rus tili yo\'nalishi', "Rus adabiyoti va ta'lim metodikasi yo\'nalishi", "Fakultetlar aro Ijtimoiy fanlar yo\'nalishi", "O'zbekiston tarixi yo\'nalishi", "Jahon tarixi yo\'nalishi", "Milliy g’oya, ma’naviyat asoslari va huquq ta’limi yo\'nalishi", "Rus tili va ta'lim metodikasi yo\'nalishi"],
+              "pedagogika": ['Pedagogika yo\'nalishi', 'Maktab menejmenti yo\'nalishi', 'Psixologiya yo\'nalishi', "Umumiy pedagogika yo\'nalishi", "Maxsus pedagogika yo\'nalishi"],
+              "maktabgacha": ['Maktabgacha ta’lim metodikasi yo\'nalishi', 'Bolalar sporti yo\'nalishi'],
+              "boshlangich": ["Boshlang'ich ta'lim nazariyasi", "Boshlangʻich taʻlim metodikasi yo\'nalishi"],
+              "turizm": ['Umumkasbiy va ihtisoslik fanlari yo\'nalishi', 'Ingliz tili yo\'nalishi', 'Nemis tili yo\'nalishi', 'Fakultetlararo chet tillar yo\'nalishi'],
+              "sport": ["Texnologik talim yo\'nalishi", "Jismoniy madaniyat metodikasi yo\'nalishi", "Jismoniy madaniyat nazariyasi"],
+              "sanatshunoslik": ["Tasviriy san’at va dizayn yo\'nalishi", "Muhandislik va kompyuter grafikasi yo\'nalishi", "Musiqa yo\'nalishi"],
               
             };
             
@@ -273,6 +329,22 @@
             
               department.innerHTML = departmentOptions;
             });
+
+            // document.getElementById('link-checkbox').addEventListener('change', function() {
+            //     document.getElementById('submit-button').disabled = !this.checked;       
+             
+            // });
+
+            document.getElementById('link-checkbox').addEventListener('change', function() {
+              var submitButton = document.getElementById('submit-button');
+              if (this.checked) {
+                submitButton.classList.remove('opacity-50');
+              } else {
+                submitButton.classList.add('opacity-50');
+              }
+              submitButton.disabled = !this.checked;
+            });
+          
     </script>
 
     <div class="font-bold">
@@ -290,8 +362,8 @@
                     </svg>
                                                   
                   </div>
-                  <input type="email" id="email" name="email" class="w-full pl-10 border-red-300 rounded-md
-                    focus:border-red-500 focus:ring-red-500 text-sm text-red-900 placeholder-red-300 pr-10" placeholder="Email manzilizni yozing"></input>
+                  <input type="email" id="email" name="email" class="w-full pl-10 rounded-md border-red-300
+                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 text-sm pr-10" placeholder="Email manzilizni yozing">
                     <div class="absolute inset-y-0 right-3 flex items-center pl-3">
                       <svg class="-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />

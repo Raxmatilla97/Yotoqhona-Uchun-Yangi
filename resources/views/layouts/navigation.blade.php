@@ -17,23 +17,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard.kelgan-arizalar')" :active="request()->routeIs('dashboard.kelgan-arizalar')">
                         {{ __("Kelib tushgan arizalar") }}
                     </x-nav-link>
-                </div>
+                </div>              
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Maqullangan arizlar') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Rad etilgan arizalar') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Boshqaruv paneli') }}
+                    <x-nav-link :href="route('dashboard.ariza-qidirish')" :active="request()->routeIs('dashboard.ariza-qidirish')">
+                        {{ __('Ariza qidirish') }}
                     </x-nav-link>
                 </div>
             </div>
