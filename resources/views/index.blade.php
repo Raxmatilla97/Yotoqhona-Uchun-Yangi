@@ -43,29 +43,22 @@
             @csrf 
             @method('post')   
 
-            @if (count($errors) > 0)
-  <div class="text-red-600">
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-@endif
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white text-center">Ma'lumotlaringizni to'ldiring</h3>
+  
             <div>
-                <label for="name" class="block text-sm font-medium @if($errors->has('name')) text-red-700 @else text-gray-700 @endif">F.I.SH</label>
+                <label for="name" class="block text-sm font-medium @if($errors->has('fish')) text-red-700 @else text-gray-700 @endif">F.I.SH</label>
                 <div class="relative rounded-md shadow-sm mt-1">
                     <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
-                        <svg class="h-5 w-5 @if($errors->has('name')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <svg class="h-5 w-5 @if($errors->has('fish')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                         </svg>                              
                     </div>
-                    <input type="text" id="name" name="name" required class="w-full pl-10 rounded-md text-sm @if($errors->has('name')) border-red-300
+                    <input type="text" id="name" name="fish" required class="w-full pl-10 rounded-md text-sm @if($errors->has('fish')) border-red-300
                     focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Talabaning F.I.SH">
                 </div>
-                @if($errors->has('name'))
+                @if($errors->has('fish'))
                   <p class="mt-2 text-sm text-red-600">
-                    @error('name'){{ $message }}@enderror
+                    @error('fish'){{ $message }}@enderror
                   </p>
                 @endif
             </div>
@@ -115,7 +108,7 @@
                 </div>
                   <select id="fakultetlar" name="fakultet" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('fakultet')) border-red-300
                     focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
-                    <option value="none" selected>Fakultet nomini tanlang</option>
+                    <option value="" selected>Fakultet nomini tanlang</option>
                     <option value="gumanitar">Gumanitar fanlar fakulteti</option>
                     <option value="pedagogika">Pedagogika fakulteti</option>
                     <option value="fizika">Fizika va kimyo fakulteti</option>
@@ -146,7 +139,7 @@
               </div>
                 <select id="department" name="yonalish" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('yonalish')) border-red-300
                   focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
-                  <option selected>Yo'nalish nomini tanlang</option>                 
+                  <option value="" selected>Yo'nalish nomini tanlang</option>                 
                 </select>
           </div>
           @if($errors->has('yonalish'))
@@ -166,7 +159,7 @@
             </div>
               <select id="kurs" name="kurs_nomeri" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('kurs_nomeri')) border-red-300
                 focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
-                <option selected>Kursingizni tanlang</option>
+                <option value="" selected>Kursingizni tanlang</option>
                 <option value="1-kurs">1-Kurs</option>
                 <option value="2-kurs">2-Kurs</option>
                 <option value="3-kurs">3-Kurs</option>
@@ -202,35 +195,35 @@
       <div>
         <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white text-center">Quyidagi qaysi me’zonlarga mos kelasiz?</h3>
         <div class="relative rounded-md shadow-sm mt-1">           
-            <ul class="w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+            <ul class="w-full text-sm font-medium rounded-lg dark:text-white bg-white border @if($errors->has('mezon'))  text-red-900  border-red-600 dark:bg-red-700 dark:border-red-600 @else  text-gray-900  border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600  @endif">
+              <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-700 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
-                      <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" value="mehribonlik_uylari_tarbiyalanuvchilari" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                      <label for="mehribonlik_uylari_tarbiyalanuvchilari" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)</label>
+                      <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" value="mehribonlik_uylari_tarbiyalanuvchilari" name="mezon" class="w-4 h-4 focus:ring-2  text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500">
+                      <label for="mehribonlik_uylari_tarbiyalanuvchilari" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)</label>
                   </div>
               </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
                       <input id="chin_yetimlar" type="radio" value="chin_yetimlar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                      <label for="chin_yetimlar" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)</label>
+                      <label for="chin_yetimlar" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)</label>
                   </div>
               </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
                       <input id="nogironligi_bor" type="radio" value="nogironligi_bor" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                      <label for="nogironligi_bor" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I va II-guruh nogironligi bo‘lgan shaxslar</label>
+                      <label for="nogironligi_bor" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">I va II-guruh nogironligi bo‘lgan shaxslar</label>
                   </div>
               </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
                       <input id="ijtimoiy_himoya" type="radio" value="ijtimoiy_himoya" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                      <label for="ijtimoiy_himoya" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">“Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).</label>
+                      <label for="ijtimoiy_himoya" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">“Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).</label>
                   </div>
               </li>
-              <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+              <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                 <div class="flex items-center pl-3">
                     <input id="uzoq_viloyatdagi_talabalar" type="radio" value="uzoq_viloyatdagi_talabalar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                    <label for="uzoq_viloyatdagi_talabalar" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)</label>
+                    <label for="uzoq_viloyatdagi_talabalar" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)</label>
                 </div>
             </li>
           </ul>

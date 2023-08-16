@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('number_generation')->nullable();
             $table->string('fish');
-            $table->string('holat');            
+            $table->string('holat')->nullable();            
             $table->string('pass_info');
             $table->string('telefon');
             $table->string('fakultet');

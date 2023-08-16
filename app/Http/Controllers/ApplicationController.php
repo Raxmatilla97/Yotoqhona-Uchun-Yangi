@@ -29,23 +29,11 @@ class ApplicationController extends Controller
      */
     public function store(StoreapplicationRequest $request)
     {
-        // $data = $request->validate([
-        //     // 'name' => 'required|max:255',
-        //     'holat' => 'required|max:255',
-        //     // 'pass_info' => 'required|max:255',
-        //     // 'telefon' => 'required|max:255',
-        //     // 'fakultet' => 'required|max:255',
-        //     // 'yonalish' => 'required|max:255',
-        //     // 'kurs_nomeri' => 'required|max:255',
-        //     // 'guruhi' => 'required|max:255',
-        //     // 'mezon' => 'required|max:255',          
-        // ]);
+        $validatedData = $request->validated();
 
+        Application::create($validatedData);        
        
-        dd($request);
-        // $newApplication = Application::create($newApplication);
-
-        // return redirect(route('site'));
+        return redirect(route('site'));
     }
 
     /**

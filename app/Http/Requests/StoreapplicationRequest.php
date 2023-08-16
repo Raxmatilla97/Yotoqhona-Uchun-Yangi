@@ -22,13 +22,13 @@ class StoreapplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:5|max:50',           
+            'fish' => 'required|min:5|max:50',           
             'pass_info' => 'required|min:10|max:25',         
-            'telefon' => 'required|min:1|max:10',
+            'telefon' => 'required|min:4|max:10',
             'fakultet' => 'required|min:1|max:25',
             'yonalish' => 'required|min:1|max:25',
             'kurs_nomeri' => 'required|min:1|max:10',
-            'guruhi' => 'required|min:1|max:100',
+            'guruhi' => 'required|min:3|max:100',
             'mezon' => 'required',
         ];
     }    
@@ -37,9 +37,9 @@ class StoreapplicationRequest extends FormRequest
         return [
 
             // Familya ism sharif uchun validatsiya messaglari
-            'name.required' => "Familya ism sharifingizni yozishingiz kerak.",
-            'name.min' => "Familya ism sharifingizni to'liq yozishingiz kerak.",
-            'name.max' => "Familya ism sharifingiz shunchalik uzunmi? 😒", 
+            'fish.required' => "Familya ism sharifingizni yozishingiz kerak.",
+            'fish.min' => "Familya ism sharifingizni to'liq yozishingiz kerak.",
+            'fish.max' => "Familya ism sharifingiz shunchalik uzunmi? 😒", 
 
             // Passport ma'lumoti uchun validatsiya messaglari
             'pass_info.required' => "Pasportingizni Serya va Nomerini yozishingiz kerak.",
@@ -57,9 +57,9 @@ class StoreapplicationRequest extends FormRequest
             'fakultet.max' => "Ro'yxatda fakultetingiz nomi shunchalik uzunmi? 😒",
 
             // Yonalish ma'lumoti uchun validatsiya messaglari    
-           'yonalish.required' => "Ro'yxatda yo'nalishingizni tanlashingiz kerak.",
-           'yonalish.min' => "Ro'yxatda yo'nalishingizni tanlashingiz kerak.",
-           'yonalish.max' => "Ro'yxatda yo'nalishingizni nomi shunchalik uzunmi? 😒",
+            'yonalish.required' => "Ro'yxatda yo'nalishingizni tanlashingiz kerak.",
+            'yonalish.min' => "Ro'yxatda yo'nalishingizni tanlashingiz kerak.",
+            'yonalish.max' => "Ro'yxatda yo'nalishingizni nomi shunchalik uzunmi? 😒",
 
             // Qaysi kursda o'qishi haqidagi ma'lumoti uchun validatsiya messaglari    
             'kurs_nomeri.required' => "Ro'yxatda qaysi kursda o'qishingizni tanlashingiz kerak.",
@@ -72,8 +72,7 @@ class StoreapplicationRequest extends FormRequest
             'guruhi.max' => "Guruhiz nomi shunchalik uzunmi? 😒",
 
             // Mezon ma'lumoti uchun validatsiya messaglari    
-            'mezon.required' => "Quyidagi mezonlardan birini tanlashingiz kerak.",         
-        
+            'mezon.required' => "Quyidagi mezonlardan birini tanlashingiz kerak.", 
 
         ];
 
