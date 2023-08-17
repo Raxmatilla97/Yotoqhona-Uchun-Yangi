@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->integer('number_generation')->nullable();
+            $table->string('number_generation')->nullable();
             $table->string('fish');
             $table->string('holat')->nullable();            
             $table->string('pass_info');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('kurs_nomeri');
             $table->string('guruhi');
             $table->string('mezon');
-            $table->text('files')->nullable();
+            $table->text('document')->nullable();
             $table->text('message')->nullable();
             $table->unsignedBigInteger('tekshirgan_user_id')->nullable();
             $table->timestamps();

@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <title>CHDPU - Yotoqhona uchun ariza berish</title>
+    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />       
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
 
@@ -39,11 +41,22 @@
             <h2 class="mt-2 sm:mt-6 text-2xl sm:text-3xl font-bold text-gray-900 text-center">CHDPU - Talabalar Turar Joyiga Online Ariza To'ldirish</h2>
         </div>
         <div class="mt-6 bg-white/80 p-6 sm:p-10 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
-          <form action="{{ route('kelgan_arizalar_store')}}" method="POST" autocomplete="off" class="space-y-6">
+
+          {{-- Message --}}
+          @if (Session::has('success'))
+          <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                  <i class="fa fa-times"></i>
+              </button>
+              <strong>Success !</strong> {{ session('success') }}
+          </div>
+          @endif          
+
+          <form action="{{ route('kelgan_arizalar_store')}}" method="POST" autocomplete="off" enctype="multipart/form-data"  class="space-y-6" >
             @csrf 
             @method('post')   
 
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white text-center">Ma'lumotlaringizni to'ldiring</h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white text-center">Ma'lumotlaringizni to'ldiring 📝</h3>
   
             <div>
                 <label for="name" class="block text-sm font-medium @if($errors->has('fish')) text-red-700 @else text-gray-700 @endif">F.I.SH</label>
@@ -53,7 +66,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                         </svg>                              
                     </div>
-                    <input type="text" id="name" name="fish" required class="w-full pl-10 rounded-md text-sm @if($errors->has('fish')) border-red-300
+                    <input type="text" id="name" name="fish" value="{{old('fish')}}" required class="w-full pl-10 rounded-md text-sm @if($errors->has('fish')) border-red-300
                     focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Talabaning F.I.SH">
                 </div>
                 @if($errors->has('fish'))
@@ -70,9 +83,14 @@
                         <path fill-rule="evenodd" d="M4.5 3.75a3 3 0 00-3 3v10.5a3 3 0 003 3h15a3 3 0 003-3V6.75a3 3 0 00-3-3h-15zm4.125 3a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zm-3.873 8.703a4.126 4.126 0 017.746 0 .75.75 0 01-.351.92 7.47 7.47 0 01-3.522.877 7.47 7.47 0 01-3.522-.877.75.75 0 01-.351-.92zM15 8.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15zM14.25 12a.75.75 0 01.75-.75h3.75a.75.75 0 010 1.5H15a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5h3.75a.75.75 0 000-1.5H15z" clip-rule="evenodd" />
                       </svg>                       
                     </div>
-                    <input type="text" id="passport_info" name="pass_info" class="w-full pl-10 rounded-md text-sm @if($errors->has('pass_info')) border-red-300
-                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Talabaning passport Seryasi va raqami">
+                    <input type="text" id="passport_info" onkeydown="if (event.key === '-' || event.key === ' ') event.preventDefault();" name="pass_info"  value="{{old('pass_info')}}" class=" w-full pl-10 rounded-md text-sm @if($errors->has('pass_info')) border-red-300
+                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif uppercase" placeholder="Talabaning passport Seryasi va raqami">
                 </div>
+                <style>
+                  #passport_info[type="text"]::placeholder {
+                    text-transform: none;
+                  }
+                </style>
                 @if($errors->has('pass_info'))
                   <p class="mt-2 text-sm text-red-600">
                     @error('pass_info'){{ $message }}@enderror
@@ -88,8 +106,8 @@
                       <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />uni
                     </svg>                    
                   </div>
-                  <input type="number" id="phone_number" name="telefon" class="w-full pl-10 rounded-md text-sm @if($errors->has('telefon')) border-red-300
-                  focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="+998(00-000-0000)">
+                  <input type="number" id="phone_number" onkeydown="if (event.key === '-' || event.key === 'e' || event.key === '.') event.preventDefault();" name="telefon" value="{{old('telefon')}}" class="w-full pl-10 rounded-md text-sm @if($errors->has('telefon')) border-red-300
+                  focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="+998(00 000 00 00)">
               </div>
               @if($errors->has('telefon'))
                 <p class="mt-2 text-sm text-red-600">
@@ -106,19 +124,19 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                   </svg>     
                 </div>
-                  <select id="fakultetlar" name="fakultet" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('fakultet')) border-red-300
+                  <select id="fakultetlar" name="fakultet" value="{{old('fakultet')}}" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('fakultet')) border-red-300
                     focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
                     <option value="" selected>Fakultet nomini tanlang</option>
-                    <option value="gumanitar">Gumanitar fanlar fakulteti</option>
-                    <option value="pedagogika">Pedagogika fakulteti</option>
-                    <option value="fizika">Fizika va kimyo fakulteti</option>
-                    <option value="boshlangich">Boshlang'ich ta'lim fakulteti</option>
-                    <option value="maktabgacha">Maktabgacha ta’lim fakulteti</option>                    
-                    <option value="turizm">Turizm fakulteti</option>
-                    <option value="tabiiy">Tabiiy fanlar fakulteti</option>
-                    <option value="matematika">Matematika va informatika fakulteti</option>
-                    <option value="sport">Sport va chaqiriqqacha harbiy ta’lim fakulteti</option>
-                    <option value="sanatshunoslik">San'atshunoslik fakulteti</option>
+                    <option value="gumanitar" {{ "gumanitar" === old('fakultet') ? 'selected' : '' }}>Gumanitar fanlar fakulteti</option>
+                    <option value="pedagogika" {{ "pedagogika" === old('fakultet') ? 'selected' : '' }}>Pedagogika fakulteti</option>
+                    <option value="fizika" {{ "fizika" === old('fakultet') ? 'selected' : '' }}>Fizika va kimyo fakulteti</option>
+                    <option value="boshlangich" {{ "boshlangich" === old('fakultet') ? 'selected' : '' }}>Boshlang'ich ta'lim fakulteti</option>
+                    <option value="maktabgacha" {{ "maktabgacha" === old('fakultet') ? 'selected' : '' }}>Maktabgacha ta’lim fakulteti</option>                    
+                    <option value="turizm" {{ "turizm" === old('fakultet') ? 'selected' : '' }}>Turizm fakulteti</option>
+                    <option value="tabiiy" {{ "tabiiy" === old('fakultet') ? 'selected' : '' }}>Tabiiy fanlar fakulteti</option>
+                    <option value="matematika" {{ "matematika" === old('fakultet') ? 'selected' : '' }}>Matematika va informatika fakulteti</option>
+                    <option value="sport" {{ "sport" === old('fakultet') ? 'selected' : '' }}>Sport va chaqiriqqacha harbiy ta’lim fakulteti</option>
+                    <option value="sanatshunoslik" {{ "sanatshunoslik" === old('fakultet') ? 'selected' : '' }}>San'atshunoslik fakulteti</option>
                   </select>
             </div>
             @if($errors->has('fakultet'))
@@ -139,7 +157,92 @@
               </div>
                 <select id="department" name="yonalish" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('yonalish')) border-red-300
                   focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
-                  <option value="" selected>Yo'nalish nomini tanlang</option>                 
+                 
+                  @if (old('yonalish'))
+                    <option value="{{old('yonalish')}}" selected>
+                      @if (old('yonalish') == 'ozbek-tilshunosligi-yonalishi')
+                        O‘zbek tilshunosligi yo'nalishi
+                      @elseif (old('yonalish') == 'ozbek-adabiyotshunosligi-yonalishi')
+                        O‘zbek adabiyotshunosligi yo'nalishi
+                      @elseif (old('yonalish') == 'fakultetlararo-rus-tili-yonalishi')
+                        Fakultetlararo rus tili yo'nalishi
+                      @elseif (old('yonalish') == 'rus-adabiyoti-va-talim-metodikasi-yonalishi')
+                        Rus adabiyoti va ta'lim metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'fakultetlar-aro-ijtimoiy-fanlar-yonalishi')
+                        Fakultetlar aro Ijtimoiy fanlar yo'nalishi
+                      @elseif (old('yonalish') == 'ozbekiston-tarixi-yonalishi')
+                        O'zbekiston tarixi yo'nalishi
+                      @elseif (old('yonalish') == 'jahon-tarixi-yonalishi')
+                        Jahon tarixi yo'nalishi
+                      @elseif (old('yonalish') == 'milliy-goya-manaviyat-asoslari-va-huquq-talimi-yonalishi')
+                        Milliy g'oya, ma'naviyat asoslari va huquq ta'limi yo'nalishi
+                      @elseif (old('yonalish') == 'rus-tili-va-talim-metodikasi-yonalishi')
+                        Rus tili va ta'lim metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'pedagogika-yonalishi')
+                        Pedagogika yo'nalishi
+                      @elseif (old('yonalish') == 'maktab-menejmenti-yonalishi')
+                        Maktab menejmenti yo'nalishi
+                      @elseif (old('yonalish') == 'psixologiya-yonalishi')
+                        Psixologiya yo'nalishi
+                      @elseif (old('yonalish') == 'umumiy-pedagogika-yonalishi')
+                        Umumiy pedagogika yo'nalishi
+                      @elseif (old('yonalish') == 'maxsus-pedagogika-yonalishi')
+                        Maxsus pedagogika yo'nalishi
+                      @elseif (old('yonalish') == 'fizika-yonalishi')
+                        Fizika yo'nalishi
+                      @elseif (old('yonalish') == 'kimyo-yonalishi')
+                        Kimyo yo'nalishi
+                      @elseif (old('yonalish') == 'fizika-va-astronomiya-oqitish-metodikasi-yonalishi')
+                        Fizika va astronomiya o'qitish metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'ilmiy-va-metodologik-kimyo-yonalishi')
+                        Ilmiy va metodologik kimyo yo'nalishi
+                      @elseif (old('yonalish') == 'boshlangich-talim-nazariyasi')
+                        Boshlang'ich ta'lim nazariyasi
+                      @elseif (old('yonalish') == 'boshlangich-talim-metodikasi-yonalishi')
+                      Boshlang'ich ta'lim metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'maktabgacha-talim-metodikasi-yonalishi')
+                        Maktabgacha ta'lim metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'bolalar-sporti-yonalishi')
+                        Bolalar sporti yo'nalishi
+                      @elseif (old('yonalish') == 'umumkasbiy-va-ihtisoslik-fanlari-yonalishi')
+                        Umumkasbiy va ihtisoslik fanlari yo'nalishi
+                      @elseif (old('yonalish') == 'ingliz-tili-yonalishi')
+                        Ingliz tili yo'nalishi
+                      @elseif (old('yonalish') == 'nemis-tili-yonalishi')
+                        Nemis tili yo'nalishi
+                      @elseif (old('yonalish') == 'fakultetlararo-chet-tillar-yonalishi')
+                        Fakultetlararo chet tillar yo'nalishi
+                      @elseif (old('yonalish') == 'biologiya-yonalishi')
+                        Biologiya yo'nalishi
+                      @elseif (old('yonalish') == 'geografiya-yonalishi')
+                        Geografiya yo'nalishi
+                      @elseif (old('yonalish') == 'genetika-va-evolutsion-biologiya-yonalishi')
+                        Genetika va evolutsion biologiya yo'nalishi
+                      @elseif (old('yonalish') == 'informatika-va-axborot-texnoligiyalari-yonalishi')
+                        Informatika va axborot texnoligiyalari yo'nalishi
+                      @elseif (old('yonalish') == 'algebra-va-matematik-analiz-yonalishi')
+                        Algebra va matematik analiz yo'nalishi
+                      @elseif (old('yonalish') == 'matematika-oqitish-metodikasi-va-geometriya-yonalishi')
+                        Matematika o'qitish metodikasi va geometriya yo'nalishi
+                      @elseif (old('yonalish') == 'informatika-oqitish-metodikasi-yonalishi')
+                        Informatika o'qitish metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'texnologik-talim-yonalishi')
+                        Texnologik talim yo'nalishi
+                      @elseif (old('yonalish') == 'jismoniy-madaniyat-metodikasi-yonalishi')
+                        Jismoniy madaniyat metodikasi yo'nalishi
+                      @elseif (old('yonalish') == 'jismoniy-madaniyat-nazariyasi')
+                        Jismoniy madaniyat nazariyasi
+                      @elseif (old('yonalish') == 'tasviriy-sanat-va-dizayn-yonalishi')
+                        Tasviriy sanat va dizayn yo'nalishi
+                      @elseif (old('yonalish') == 'muhandislik-va-kompyuter-grafikasi-yonalishi')
+                        Muhandislik va kompyuter grafikasi yo'nalishi
+                      @elseif (old('yonalish') == 'musiqa-yonalishi')
+                        Musiqa yo'nalishi
+                      @endif
+                    </option>
+                  @else                
+                    <option value="" selected>Yo'nalish nomini tanlang</option>
+                  @endif         
                 </select>
           </div>
           @if($errors->has('yonalish'))
@@ -160,11 +263,11 @@
               <select id="kurs" name="kurs_nomeri" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('kurs_nomeri')) border-red-300
                 focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
                 <option value="" selected>Kursingizni tanlang</option>
-                <option value="1-kurs">1-Kurs</option>
-                <option value="2-kurs">2-Kurs</option>
-                <option value="3-kurs">3-Kurs</option>
-                <option value="4-kurs">4-Kurs</option>
-                <option value="5-kurs">5-Kurs</option>                      
+                <option value="1-kurs" {{ "1-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>1-Kurs</option>
+                <option value="2-kurs" {{ "2-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>2-Kurs</option>
+                <option value="3-kurs" {{ "3-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>3-Kurs</option>
+                <option value="4-kurs" {{ "4-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>4-Kurs</option>
+                <option value="5-kurs" {{ "5-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>5-Kurs</option>                      
               </select>
           </div>
           @if($errors->has('kurs_nomeri'))
@@ -182,7 +285,7 @@
                 </svg>
                                             
             </div>
-            <input type="text" id="guruh" name="guruhi" required class="w-full pl-10 rounded-md text-sm @if($errors->has('guruhi')) border-red-300
+            <input type="text" id="guruh" name="guruhi" value="{{old('guruhi')}}" required class="w-full pl-10 rounded-md text-sm @if($errors->has('guruhi')) border-red-300
             focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="Tahsil olayotgan guruhingizni yozing">
           </div>
           @if($errors->has('guruhi'))
@@ -198,31 +301,31 @@
             <ul class="w-full text-sm font-medium rounded-lg dark:text-white bg-white border @if($errors->has('mezon'))  text-red-900  border-red-600 dark:bg-red-700 dark:border-red-600 @else  text-gray-900  border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600  @endif">
               <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-700 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
-                      <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" value="mehribonlik_uylari_tarbiyalanuvchilari" name="mezon" class="w-4 h-4 focus:ring-2  text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" @if(old('mezon') == 'mehribonlik_uylari_tarbiyalanuvchilari') checked @endif value="mehribonlik_uylari_tarbiyalanuvchilari" name="mezon" class="w-4 h-4 focus:ring-2  text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500">
                       <label for="mehribonlik_uylari_tarbiyalanuvchilari" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
-                      <input id="chin_yetimlar" type="radio" value="chin_yetimlar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="chin_yetimlar" type="radio" @if(old('mezon') == 'chin_yetimlar') checked @endif  value="chin_yetimlar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="chin_yetimlar" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
-                      <input id="nogironligi_bor" type="radio" value="nogironligi_bor" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="nogironligi_bor" type="radio" @if(old('mezon') == 'nogironligi_bor') checked @endif  value="nogironligi_bor" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="nogironligi_bor" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">I va II-guruh nogironligi bo‘lgan shaxslar</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                   <div class="flex items-center pl-3">
-                      <input id="ijtimoiy_himoya" type="radio" value="ijtimoiy_himoya" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                      <input id="ijtimoiy_himoya" type="radio" @if(old('mezon') == 'ijtimoiy_himoya') checked @endif value="ijtimoiy_himoya" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                       <label for="ijtimoiy_himoya" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">“Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).</label>
                   </div>
               </li>
               <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-600 @else dark:border-gray-600 @endif">
                 <div class="flex items-center pl-3">
-                    <input id="uzoq_viloyatdagi_talabalar" type="radio" value="uzoq_viloyatdagi_talabalar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    <input id="uzoq_viloyatdagi_talabalar" type="radio" @if(old('mezon') == 'uzoq_viloyatdagi_talabalar') checked @endif value="uzoq_viloyatdagi_talabalar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                     <label for="uzoq_viloyatdagi_talabalar" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700 dark:text-red-600 @else text-gray-900 dark:text-gray-300 @endif">Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)</label>
                 </div>
             </li>
@@ -248,16 +351,17 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
         </svg>
           
-          <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-54 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                  </svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center"><span class="font-semibold">Bu yerga bosib</span> fayl yuklang</p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400 text-center">PNG, JPG, PDF, WORD (MAX. 5MB)</p>
-              </div>
-              <input id="dropzone-file" type="file" name="files" class="hidden" />
-          </label>
+          <label for="document" class=" w-full h-54 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+             
+
+            <input type="file" name="document" />
+             
+          </label> 
+         
+          
+            
+          
+
       </div>
       <div class="mb-7 ml-4">
         <div class="flex items-center">
@@ -290,20 +394,20 @@
           <p class="font-medium text-sm pl-8 text-gray-600 hover:gray-500 text-center">Sahifa test holatida! Foydalanishda hatoliklar chiqsa bu haqda <a href="https://t.me/Raxmatilla_Fayziyev" class="font-bold text-cyan-400 hover:text-cyan-700">yozishingiz mumkin.</a></p>
         </div>
     </div>
-
+   
     <script>
        var departments = {
               "none": ["Yo'nalish nomini tanlang"],
               "fizika": ['Fizika yo\'nalishi', 'Kimyo yo\'nalishi', "Fizika va astronomiya o'qitish metodikasi yo\'nalishi", "Ilmiy va metodologik kimyo yo\'nalishi"],
               "matematika": ['Informatika va axborot texnoligiyalari yo\'nalishi', 'Algebra va matematik analiz yo\'nalishi', "Matematika o'qitish metodikasi va geometriya yo\'nalishi", "Informatika o'qitish metodikasi yo\'nalishi"],
               "tabiiy": ['Biologiya yo\'nalishi', 'Geografiya yo\'nalishi', 'Genetika va evolutsion biologiya yo\'nalishi'],
-              "gumanitar": ["O'zbek tilshunosligi yo\'nalishi", "O‘zbek adabiyotshunosligi yo\'nalishi", 'Fakultetlararo rus tili yo\'nalishi', "Rus adabiyoti va ta'lim metodikasi yo\'nalishi", "Fakultetlar aro Ijtimoiy fanlar yo\'nalishi", "O'zbekiston tarixi yo\'nalishi", "Jahon tarixi yo\'nalishi", "Milliy g’oya, ma’naviyat asoslari va huquq ta’limi yo\'nalishi", "Rus tili va ta'lim metodikasi yo\'nalishi"],
+              "gumanitar": ["O'zbek tilshunosligi yo\'nalishi", "O'zbek adabiyotshunosligi yo\'nalishi", 'Fakultetlararo rus tili yo\'nalishi', "Rus adabiyoti va ta'lim metodikasi yo\'nalishi", "Fakultetlar aro Ijtimoiy fanlar yo\'nalishi", "O'zbekiston tarixi yo\'nalishi", "Jahon tarixi yo\'nalishi", "Milliy g'oya, ma'naviyat asoslari va huquq ta'limi yo\'nalishi", "Rus tili va ta'lim metodikasi yo\'nalishi"],
               "pedagogika": ['Pedagogika yo\'nalishi', 'Maktab menejmenti yo\'nalishi', 'Psixologiya yo\'nalishi', "Umumiy pedagogika yo\'nalishi", "Maxsus pedagogika yo\'nalishi"],
-              "maktabgacha": ['Maktabgacha ta’lim metodikasi yo\'nalishi', 'Bolalar sporti yo\'nalishi'],
-              "boshlangich": ["Boshlang'ich ta'lim nazariyasi", "Boshlangʻich taʻlim metodikasi yo\'nalishi"],
+              "maktabgacha": ['Maktabgacha ta\'lim metodikasi yo\'nalishi', 'Bolalar sporti yo\'nalishi'],
+              "boshlangich": ["Boshlang'ich ta'lim nazariyasi", "Boshlang'ich ta'lim metodikasi yo\'nalishi"],
               "turizm": ['Umumkasbiy va ihtisoslik fanlari yo\'nalishi', 'Ingliz tili yo\'nalishi', 'Nemis tili yo\'nalishi', 'Fakultetlararo chet tillar yo\'nalishi'],
               "sport": ["Texnologik talim yo\'nalishi", "Jismoniy madaniyat metodikasi yo\'nalishi", "Jismoniy madaniyat nazariyasi"],
-              "sanatshunoslik": ["Tasviriy san’at va dizayn yo\'nalishi", "Muhandislik va kompyuter grafikasi yo\'nalishi", "Musiqa yo\'nalishi"],
+              "sanatshunoslik": ["Tasviriy san\at va dizayn yo\'nalishi", "Muhandislik va kompyuter grafikasi yo\'nalishi", "Musiqa yo\'nalishi"],
               
             };
             
@@ -315,7 +419,8 @@
               var departmentOptions = '';
             
               for (var i = 0; i < departments[selectedFaculty].length; i++) {
-                departmentOptions += '<option value="' + departments[selectedFaculty][i].split(' ')[0].toLowerCase().replace(/[\'‘]/g, '') + '">' + departments[selectedFaculty][i] + '</option>';
+                departmentOptions += '<option value="' + departments[selectedFaculty][i].toLowerCase().replace(/\s+/g, '-').replace(/['‘,]/g, '') + '">' + departments[selectedFaculty][i] + '</option>';
+                
               }
 
               // departmentOptions += '<option value="' + departments[selectedFaculty][i].split(' ')[0].toLowerCase().replace(/[\'‘]/g, '') + '">' + departments[selectedFaculty][i] + '</option>';
@@ -336,9 +441,13 @@
                 submitButton.classList.add('opacity-50');
               }
               submitButton.disabled = !this.checked;
-            });
-          
+            });           
+
     </script>
+     
+    
+
+
 
     <div class="font-bold">
       <hr class="my-6 border-gray-400 sm:mx-auto dark:border-gray-700 lg:my-8" />
@@ -366,5 +475,23 @@
               <p class="mt-2 text-sm text-red-600">Siz yozgan email bazada mavjud!</p>
             </div> -->
             <!--  /Error validatsiyasi uchun namuna -->
+
+     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>  
+     <script>
+       // Set default FilePond options
+    FilePond.setOptions({
+        server: {           
+            process: "/tmp-upload",
+            headers: {
+                'X-CSRF-TOKEN': "{{ @csrf_token() }}"
+                
+            }
+        }
+    });
+
+    // Create the FilePond instance
+    FilePond.create(document.querySelector('input[name="document"]'));
+    // FilePond.create(document.querySelector('input[name="gallery[]"]'), {chunkUploads: true});
+  </script>
   </body>
 </html>

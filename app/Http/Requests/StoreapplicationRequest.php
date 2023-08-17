@@ -23,13 +23,16 @@ class StoreapplicationRequest extends FormRequest
     {
         return [
             'fish' => 'required|min:5|max:50',           
-            'pass_info' => 'required|min:10|max:25',         
-            'telefon' => 'required|min:4|max:10',
+            'pass_info' => 'required|unique:applications|min:2|max:25',         
+            'telefon' => 'required|unique:applications|min:4|max:18',
             'fakultet' => 'required|min:1|max:25',
-            'yonalish' => 'required|min:1|max:25',
+            'yonalish' => 'required|min:1|max:100',
             'kurs_nomeri' => 'required|min:1|max:10',
             'guruhi' => 'required|min:3|max:100',
-            'mezon' => 'required',
+            'mezon' => 'required'
+            
+            
+
         ];
     }    
     public function messages()    {
@@ -44,12 +47,14 @@ class StoreapplicationRequest extends FormRequest
             // Passport ma'lumoti uchun validatsiya messaglari
             'pass_info.required' => "Pasportingizni Serya va Nomerini yozishingiz kerak.",
             'pass_info.min' => "Pasportingizni Serya va Nomerini to'liq yozishingiz kerak.",
-            'pass_info.max' => "Pasportingiz Serya va Nomeri shunchalik uzunmi? 😒", 
+            'pass_info.max' => "Pasportingiz Serya va Nomeri shunchalik uzunmi? 😒",
+            'pass_info.unique' => "Bu pasport serya raqami bo'yicha ariza qoldirilgan!",
 
             // Telefon ma'lumoti uchun validatsiya messaglari    
             'telefon.required' => "Shaxsiy telefon raqamingizni yozishingiz kerak.",
             'telefon.min' => "Shaxsiy telefon raqamingizni to'liq yozishingiz kerak.",
-            'telefon.max' => "Shaxsiy telefon raqamingiz shunchalik uzunmi? 😒", 
+            'telefon.max' => "Shaxsiy telefon raqamingiz shunchalik uzunmi? 😒",
+            'telefon.unique' => "Bu telefon raqami bo'yicha ariza qoldirilgan!",
 
             // Fakultet ma'lumoti uchun validatsiya messaglari    
             'fakultet.required' => "Ro'yxatda fakultetingizni tanlashingiz kerak.",

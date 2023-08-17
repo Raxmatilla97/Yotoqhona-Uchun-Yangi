@@ -3,15 +3,23 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\TestController;
+
 
 
 Route::get('/', function () {
     return view('index');
 })->name('site');
 
+Route::get('/confirm', function () {
+    return view('confirm');
+})->name('confirm');
+
  // Talabalardan kelib tushgan arizlalarni listi
  Route::post('/kelgan', [ApplicationController::class, 'store'])->name('kelgan_arizalar_store');
 
+ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
+ Route::delete('/tmp-delete', [ApplicationController::class, 'tmpDelete']);
 
 /*
 |--------------------------------------------------------------------------

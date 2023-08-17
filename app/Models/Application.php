@@ -19,7 +19,7 @@ class Application extends Model
         'kurs_nomeri',
         'guruhi',
         'mezon',
-        'files',
+        'document',
         'message',
         'tekshirgan_user_id',
     ];
