@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Application;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 
@@ -30,6 +30,8 @@ class TestController extends Controller
     {
         //
     }
+
+   
 
     /**
      * Display the specified resource.
@@ -63,27 +65,13 @@ class TestController extends Controller
         //
     }
 
-    public function tmpUpload(Request $request) {
-        // if ($request->hasFile('document')) {
-        //     $file = $request->file('document');
-        //     $filename = $file->getClientOriginalName();
-        //     $folder = uniqid() . '-' . now()->timestamp;
-        //     $file->storeAs('document/' . $folder, $filename);
-        //     TemporaryFile::create([
-        //         'folder' => $folder,
-        //         'file' => $filename
-        //     ]);
-            
-        //     return $folder;
-        // }
-        
-        // return '';
+    public function tmpUpload(Request $request) {    
 
         if ($request->hasFile('document')) {
             $file = $request->file('document');
             $filename = $file->getClientOriginalName();            
-            $folder = uniqid('document', true);
-            $file->storeAs('document/tmp/' . $folder, $filename);
+            $folder = uniqid('vaqtincha', true);
+            $file->storeAs('vaqtincha/tmp/' . $folder, $filename);
             TemporaryFile::create([
                 'folder' => $folder,
                 'file' => $filename

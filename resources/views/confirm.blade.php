@@ -67,7 +67,7 @@
 
                     <div class="mt-4 sm:flex sm:items-center sm:justify-between sm:mt-6 sm:-mx-2">
                         <button  class="px-4 sm:mx-2 w-full py-2.5 text-sm font-medium dark:text-gray-200  dark:border-gray-700 dark:hover:bg-gray-800 tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
-                            <a href="{{ route('site') }}">Ariza sahifasiga qaytish</a>
+                            <a href="{{ '/' }}">Ariza sahifasiga qaytish</a>
                         </button>
     
                         <button class="px-4 sm:mx-2 w-full py-2.5 mt-3 sm:mt-0 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">

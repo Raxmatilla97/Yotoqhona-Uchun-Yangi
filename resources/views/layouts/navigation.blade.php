@@ -17,12 +17,12 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.kelgan-arizalar')" :active="request()->routeIs('dashboard.kelgan-arizalar')">
+                    <x-nav-link :href="route('kelgan-arizalar')" :active="request()->routeIs('kelgan-arizalar')">
                         {{ __("Kelib tushgan arizalar") }}
                     </x-nav-link>
                 </div>              
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard.ariza-qidirish')" :active="request()->routeIs('dashboard.ariza-qidirish')">
+                    <x-nav-link :href="route('kelgan-arizalar')" :active="request()->routeIs('kelgan-arizalar')">
                         {{ __('Ariza qidirish') }}
                     </x-nav-link>
                 </div>

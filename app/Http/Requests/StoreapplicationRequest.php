@@ -29,7 +29,8 @@ class StoreapplicationRequest extends FormRequest
             'yonalish' => 'required|min:1|max:100',
             'kurs_nomeri' => 'required|min:1|max:10',
             'guruhi' => 'required|min:3|max:100',
-            'mezon' => 'required'
+            'mezon' => 'required',
+            'document' => 'required',
             
             
 
@@ -77,8 +78,11 @@ class StoreapplicationRequest extends FormRequest
             'guruhi.max' => "Guruhiz nomi shunchalik uzunmi? 😒",
 
             // Mezon ma'lumoti uchun validatsiya messaglari    
-            'mezon.required' => "Quyidagi mezonlardan birini tanlashingiz kerak.", 
+            'mezon.required' => "Quyidagi mezonlardan birini tanlashingiz kerak.",
 
+            // Hujjatlar uchun validatsiya messaglari    
+            'document.required' => "Hujjatingizni yuklashingiz kerak.",
+            
         ];
 
     }

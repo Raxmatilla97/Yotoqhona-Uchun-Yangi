@@ -15,7 +15,7 @@
   <body
     class="bg-gray-50 min-h-screen bg-[url('/public/assets/wave.svg')] bg-no-repeat bg-bottom bg-fixed"
   >
-    <div class="flex justify-between p-6 items-center">
+    <div class="flex justify-between py-6 lg:px-80 px-6 items-center">
       <a href="#" class="flex items-center gap-2">
         <svg class="h-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
@@ -25,10 +25,16 @@
       <div class="">
         <a
           href="#"
-          class="text-sm rounded-md bg-green-600 py-2 px-4 text-white font-semibold shadow-lg hover:shadow-xl 
+          class="text-md rounded-md bg-green-600 py-3 px-5 text-white font-semibold shadow-lg hover:shadow-xl 
             focus:shadow-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 
             focus:ring-offset-2 transition duration-150 ease-in-out"
-          >Ariza holati</a
+          >
+          @desktop
+            Ariza holatini tekshirish
+          @elsedesktop
+             Ariza holati
+          @enddesktop
+          </a
         >
       </div>
     </div>
@@ -56,7 +62,7 @@
             @csrf 
             @method('post')   
 
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white text-center">Ma'lumotlaringizni to'ldiring 📝</h3>
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white text-center">Ma'lumotlaringizni to'ldiring ! </h3>
   
             <div>
                 <label for="name" class="block text-sm font-medium @if($errors->has('fish')) text-red-700 @else text-gray-700 @endif">F.I.SH</label>
@@ -199,7 +205,7 @@
                       @elseif (old('yonalish') == 'boshlangich-talim-nazariyasi')
                         Boshlang'ich ta'lim nazariyasi
                       @elseif (old('yonalish') == 'boshlangich-talim-metodikasi-yonalishi')
-                      Boshlang'ich ta'lim metodikasi yo'nalishi
+                        Boshlang'ich ta'lim metodikasi yo'nalishi
                       @elseif (old('yonalish') == 'maktabgacha-talim-metodikasi-yonalishi')
                         Maktabgacha ta'lim metodikasi yo'nalishi
                       @elseif (old('yonalish') == 'bolalar-sporti-yonalishi')
@@ -254,22 +260,22 @@
 
       <div>
         <label for="kurs" class="block text-sm font-medium @if($errors->has('kurs_nomeri')) text-red-700 @else text-gray-700 @endif">Tahsil olayotgan bosqichingiz</label>
-        <div class="relative rounded-md shadow-sm mt-1">
-            <div class="absolute inset-y-0 flex  items-center left-0 pl-3">            
-              <svg class="h-5 w-5 @if($errors->has('kurs_nomeri')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
-              </svg>                  
+          <div class="relative rounded-md shadow-sm mt-1">
+              <div class="absolute inset-y-0 flex  items-center left-0 pl-3">            
+                <svg class="h-5 w-5 @if($errors->has('kurs_nomeri')) text-red-400 @else text-gray-400 @endif" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+                </svg>                  
+              </div>
+                <select id="kurs" name="kurs_nomeri" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('kurs_nomeri')) border-red-300
+                  focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
+                  <option value="" selected>Kursingizni tanlang</option>
+                  <option value="1-kurs" {{ "1-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>1-Kurs</option>
+                  <option value="2-kurs" {{ "2-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>2-Kurs</option>
+                  <option value="3-kurs" {{ "3-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>3-Kurs</option>
+                  <option value="4-kurs" {{ "4-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>4-Kurs</option>
+                  <option value="5-kurs" {{ "5-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>5-Kurs</option>                      
+                </select>
             </div>
-              <select id="kurs" name="kurs_nomeri" class="w-full pl-10 rounded-md text-sm normal-case @if($errors->has('kurs_nomeri')) border-red-300
-                focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
-                <option value="" selected>Kursingizni tanlang</option>
-                <option value="1-kurs" {{ "1-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>1-Kurs</option>
-                <option value="2-kurs" {{ "2-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>2-Kurs</option>
-                <option value="3-kurs" {{ "3-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>3-Kurs</option>
-                <option value="4-kurs" {{ "4-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>4-Kurs</option>
-                <option value="5-kurs" {{ "5-kurs" === old('kurs_nomeri') ? 'selected' : '' }}>5-Kurs</option>                      
-              </select>
-          </div>
           @if($errors->has('kurs_nomeri'))
             <p class="mt-2 text-sm text-red-600">
               @error('kurs_nomeri'){{ $message }}@enderror
@@ -296,7 +302,7 @@
       </div>
 
       <div>
-        <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white text-center">Quyidagi qaysi me’zonlarga mos kelasiz?</h3>
+        <h3 class="mb-4 text-md font-semibold text-gray-900 dark:text-white text-center">Quyidagi qaysi me’zonlarga mos kelasiz?</h3>
         <div class="relative rounded-md shadow-sm mt-1">           
             <ul class="w-full text-sm font-medium rounded-lg dark:text-white bg-white border @if($errors->has('mezon'))  text-red-900  border-red-600 dark:bg-red-700 dark:border-red-600 @else  text-gray-900  border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600  @endif">
               <li class="w-full border-b border-gray-200 rounded-t-lg @if($errors->has('mezon')) dark:border-red-700 @else dark:border-gray-600 @endif">
@@ -342,7 +348,7 @@
       <div>
         <div class="flex items-center justify-center max-w-full mb-7">
           <div class="relative text-center">
-            <h2 class="shadow-sm relative rounded-md text-lg border border-gray-200 rounded-t-lg dark:border-gray-600 font-medium px-1 py-3 right-2 ">Yuqoridagi me'zonlarni asoslovchi hujjatingizni yuklang.
+            <h2 class="shadow-sm relative rounded-md text-md border  border-gray-200  dark:border-gray-600  rounded-t-lg  font-medium px-1 py-3 right-2 ">Yuqoridagi me'zonlarni asoslovchi hujjatingizni yuklang.
             </h2>
             
             
@@ -351,22 +357,24 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
         </svg>
           
-          <label for="document" class=" w-full h-54 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+          <label for="document" class=" w-full h-57 border-2 @if($errors->has('document')) border-red-300 border-dashed rounded-lg cursor-pointer bg-red-50 dark:hover:bg-red-800 dark:bg-red-700 hover:bg-red-100 dark:border-red-600 dark:hover:border-red-500 dark:hover:bg-red-600 @else border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 @endif ">
              
 
-            <input type="file" name="document" />
+            <input type="file" name="document" data-max-file-size="3MB" />
              
-          </label> 
-         
-          
-            
-          
+          </label>           
+      </div>        
 
-      </div>
+          @if($errors->has('document'))
+            <p class="mt-[-15px] mb-5 text-sm text-red-600">
+              @error('document'){{ $message }}@enderror
+            </p>
+          @endif
+
       <div class="mb-7 ml-4">
         <div class="flex items-center">
           <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-          <label for="link-checkbox"  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Barcha ma'lumotlaringiz to'grimi? <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Bir qayta ko'rish</a>.</label>
+          <label for="link-checkbox"  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Barcha ma'lumotlaringiz to'grimi? <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Qayta tekshirish</a>.</label>
         </div>
       </div>                    
           <div>
@@ -454,44 +462,36 @@
       <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://cspi.uz/" class="hover:underline">CSPU</a>. All Rights Reserved. Fayziyev.R | Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})</span>
      
     </div>
-      <!--  Error validatsiyasi uchun namuna -->
-            <!-- <div>
-              <label for="email" class="block text-sm font-medium text-red-700">Email</label>
-              <div class="relative rounded-md shadow-sm mt-1">
-                  <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
-                    <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                                                  
-                  </div>
-                  <input type="email" id="email" name="email" class="w-full pl-10 rounded-md border-red-300
-                    focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 text-sm pr-10" placeholder="Email manzilizni yozing">
-                    <div class="absolute inset-y-0 right-3 flex items-center pl-3">
-                      <svg class="-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd" />
-                      </svg>                        
-                    </div>
-              </div>
-              <p class="mt-2 text-sm text-red-600">Siz yozgan email bazada mavjud!</p>
-            </div> -->
-            <!--  /Error validatsiyasi uchun namuna -->
+      
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="{{ asset('file-size.js')}}"></script>
+    <script src="{{ asset('filepond.js')}}"></script>  
+    <script>
+      // Register the plugins
+      FilePond.registerPlugin(FilePondPluginFileValidateSize, FilePondPluginFileValidateType);
 
-     <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>  
-     <script>
-       // Set default FilePond options
-    FilePond.setOptions({
-        server: {           
-            process: "/tmp-upload",
-            headers: {
-                'X-CSRF-TOKEN': "{{ @csrf_token() }}"
-                
-            }
-        }
-    });
+      // Set options
+      FilePond.setOptions({
+          acceptedFileTypes: ['image/png', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',  'application/x-zip-compressed', 'application/x-rar-compressed'],
+          server: {
+              process: "/tmp-upload",
+              headers: {
+                  'X-CSRF-TOKEN': "{{ @csrf_token() }}"
+              }
+          },
+          fileValidateTypeDetectType: (source, type) =>
+              new Promise((resolve, reject) => {
+                  // Do custom MIME type detection here and return with promise
+                  resolve(type);
+              }),
+      });
 
-    // Create the FilePond instance
-    FilePond.create(document.querySelector('input[name="document"]'));
-    // FilePond.create(document.querySelector('input[name="gallery[]"]'), {chunkUploads: true});
-  </script>
+      // Get a reference to the file input element
+      const inputElement = document.querySelector('input[name="document"]');
+
+      // Create the FilePond instance
+      const pond = FilePond.create(inputElement);
+
+    </script>
   </body>
 </html>
