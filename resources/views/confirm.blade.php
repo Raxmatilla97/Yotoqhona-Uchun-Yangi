@@ -13,23 +13,7 @@
   <body
     class="bg-gray-50 min-h-screen bg-[url('/public/assets/wave.svg')] bg-no-repeat bg-bottom bg-fixed"
   >
-    <div class="flex justify-between p-6 items-center">
-      <a href="#" class="flex items-center gap-2">
-        <svg class="h-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-        </svg>
-        <span class="text-xl font-black uppercase">Online Ariza</span>
-      </a>
-      <div class="">
-        <a
-          href="#"
-          class="text-sm rounded-md bg-green-600 py-2 px-4 text-white font-semibold shadow-lg hover:shadow-xl 
-            focus:shadow-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 
-            focus:ring-offset-2 transition duration-150 ease-in-out"
-          >Ariza holati</a
-        >
-      </div>
-    </div>
+    @include('modal')
     <div class="flex flex-col justify-center p-6 pb-12">
         <div class="max-w-md mx-auto">
             <!-- <svg class="h-12 text-green-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -42,12 +26,12 @@
 
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <img class="object-cover w-full h-64" src="https://cdn.dribbble.com/users/4358240/screenshots/14825308/media/84f51703b2bfc69f7e8bb066897e26e0.gif" alt="Article">
+                <img class="object-cover w-full h-64" src="{{ asset('assets/complite.gif')}}" alt="Article">
             
                 <div class="p-6">
                     <div>
                         <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Ariza joylandi!</span>
-                        <p class="block mt-2 pb-4 text-center text-xl font-semibold capitalize text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
+                        <p class="block mt-2 pb-4 text-center text-xl font-semibold normal-case text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
                           {{ request()->query('name')}} <br> sizning arizangiz tez orada ko'rib chiqiladi!
                         </p>
                         <p class="mt-2 text-md text-gray-600 dark:text-gray-400">
@@ -58,7 +42,7 @@
                     <div class="flex items-center justify-between w-full mt-5 gap-x-2">
                         <input type="text" onclick="copyText()" id="myInput" disabled value="{{ request()->query('code') }}" class="flex-1 block h-10 px-4 text-xl text-gray-700 text-center bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                         
-                        <button onclick="copyText()" class="rounded-md hidden sm:block p-1.5 text-gray-700 bg-white border border-gray-200 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-500">
+                        <button id="copyBtn"  onclick="copyText()" class="rounded-md hidden sm:block p-1.5 text-gray-700 bg-white border border-gray-200 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
@@ -71,7 +55,7 @@
                         </button>
     
                         <button class="px-4 sm:mx-2 w-full py-2.5 mt-3 sm:mt-0 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
-                            <a href="#">Arizani holatini tekshirish</a>
+                            <a href="https://t.me/tvchdpi2017">OTM telegram kanali</a>
                         </button>
                     </div>  
                     
@@ -127,34 +111,34 @@
       
 
       <script>
-        function copyText() {
-          var input = document.getElementById("myInput");
-          input.select();
-          input.setSelectionRange(0, 99999); // Katta raqamlar uchun
-        
-          navigator.clipboard.writeText(input.value)
+       function copyText() {
+        var input = document.getElementById("myInput");
+        input.select();
+        input.setSelectionRange(0, 99999); // Katta raqamlar uchun
+
+        navigator.clipboard.writeText(input.value)
             .then(function() {
-              var copiedText = document.getElementById("copiedText");
-              copiedText.textContent = input.value;
-              openModal();
+                var copiedText = document.getElementById("copiedText");
+                copiedText.textContent = input.value;
+                openModal();
             })
             .catch(function(error) {
-              console.error("Matn nusxa ololmadi: ", error);
+                console.error("Matn nusxa olinmadi: ", error);
             });
-        }
-        
-        function openModal() {
-          var modal = document.querySelector('.fixed');
-          modal.classList.remove('hidden');
-        }
+    }
 
-        function closeModal() {
-          var modal = document.querySelector('.fixed');
-          modal.classList.add('hidden');
-        }
+    function openModal() {
+        var modal = document.getElementById('modal');
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('modal');
+        modal.classList.add('hidden');
+    }
     </script>
 
-  <div class="hidden fixed inset-0 flex items-center justify-center z-50">
+<div id="modal" class="hidden fixed inset-0 flex items-center justify-center z-50">
   <div class="fixed z-1 inset-0 bg-black opacity-50"></div>
   <div class="bg-white z-0 rounded-lg p-4">   
     <div class="flex w-50 max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
@@ -170,8 +154,8 @@
               <p class="text-sm text-gray-600 dark:text-gray-200">ID raqamni saqlab qo'ying!</p>
           </div>
       </div>
-  </div>
-  <button class="mt-4 px-4 w-full py-2 flex items-center justify-center bg-blue-500 text-white rounded hover:bg-blue-600" onclick="closeModal()">Yopish</button>
+    </div>
+    <button class="mt-4 px-4 w-full py-2 flex items-center justify-center bg-blue-500 text-white rounded hover:bg-blue-600" onclick="closeModal()">Yopish</button>
   </div>
 </div>
 

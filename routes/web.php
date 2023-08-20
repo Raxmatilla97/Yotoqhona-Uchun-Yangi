@@ -16,11 +16,19 @@ Route::get('/confirm', function () {
     return view('confirm');
 })->name('confirm');
 
- // Talabalardan kelib tushgan arizlalarni listi
- Route::post('/kelgan', [ApplicationController::class, 'store'])->name('kelgan_arizalar_store');
+// Talabalardan kelib tushgan arizlalarni listi
+Route::post('/kelgan', [ApplicationController::class, 'store'])->name('kelgan_arizalar_store');
+
+// Ariza holatini tekshirish
+Route::post('/arizani-tekshirish', [ApplicationController::class, 'arizaniTekshirish'])->name('arizani-tekshirish');
+
+// Ariza holatini tekshirish
+Route::get('/arizani-javobi', function () {
+    return view('javob');
+})->name('arizani-javobi');
 
 //  Yuklangan fayllarni saqalash routeri
- Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
+Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
 
 
 /*
@@ -61,7 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/kelgan-arizalarni-korish', [ApplicationController::class, 'show'])->name('kelgan-arizalarni-korish');
 
     // Talabalardan kelib tushgan arizlalarnini tahrirlash
-    Route::get('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'edite'])->name('kelgan-arizalarni-tahrirlash');
+    Route::post('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'tahrirlash'])->name('kelgan-arizalarni-tahrirlash');
 
     // Talabalardan kelib tushgan arizlalarnini o'chirish
     Route::get('/dashboard/kelgan-arizalarni-ochirish', [ApplicationController::class, 'delete'])->name('kelgan-arizalarni-ochirish');

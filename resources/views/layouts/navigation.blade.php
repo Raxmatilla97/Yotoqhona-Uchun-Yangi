@@ -18,7 +18,7 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('kelgan-arizalar')" :active="request()->routeIs('kelgan-arizalar')">
-                        {{ __("Kelib tushgan arizalar") }}
+                        {{ __("Barcha arizalar ro'yxati") }}
                     </x-nav-link>
                 </div>              
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Storage;
@@ -49,6 +49,62 @@ class ApplicationController extends Controller
         return redirect(route('confirm', ['code' => $code, 'name' => $name,]));
 
     }
+
+
+    public function tahrirlash(UpdateapplicationRequest $request)
+    {   
+        $data = $request->all();
+        $application = Application::find($data['id']);
+        $name = $application->fish;
+        
+        $application->update($data);
+
+        return redirect()->route('kelgan-arizalar')->with(
+        [
+            'status' => true,
+            'name' => $name
+        
+        ]);
+      
+
+    }
+
+    /**
+     * Arizani tekshirish
+     */
+    public function arizaniTekshirish(Request $request)
+    {
+        $data = $request->all();
+        $hulosa = ""; // $hulosa o'zgaruvchisini e'lon qilingan joydan o'zgartirdik      
+
+        if (is_numeric($data['number_generation'])) {
+
+            $application = Application::where('number_generation', $data['number_generation'])->first();        
+            if (!$application) {
+                $topilmadi = true;
+                $hulosa = [];
+            } else {
+                $topilmadi = false;
+                $hulosa = [
+                    'fish' => $application->fish,
+                    'holat' => $application->holat,
+                    'number' => $application->number_generation,
+                    'message' => $application->message
+                ];
+            }
+        } else {
+            $topilmadi = true;
+            $hulosa = [];           
+        }        
+       
+        
+        return view('javob')->with([
+            'hulosa' => $hulosa,
+            'topilmadi' => $topilmadi
+        ]);
+    }
+
+  
 
     /**
      * Arizani mazmunini ko'rsatish
@@ -117,14 +173,18 @@ class ApplicationController extends Controller
      */
     public function dashboard()
     {
-        $arizalar = Application::count();
+        $arizalar_count = Application::count();
         $arizalar_maqullangan = Application::where('holat', 'maqullandi')->count();
         $arizalar_rad_etildi = Application::where('holat', 'rad_etildi')->count();
         $arizalar_korilmagan = Application::where('holat', 'korib_chiqilmoqda' )->count();
 
+        $arizalar = Application::where('holat', 'korib_chiqilmoqda')->paginate(10);
+        $arizalar = $this->filterArizalar($arizalar);  
+
 
         return view('dashboard')->with([
             'arizalar' => $arizalar,
+            'arizalar_count' => $arizalar_count,
             'arizalar_maqullangan' => $arizalar_maqullangan,
             'arizalar_rad_etildi' => $arizalar_rad_etildi,
             'arizalar_korilmagan' => $arizalar_korilmagan

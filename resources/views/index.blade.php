@@ -15,29 +15,9 @@
   <body
     class="bg-gray-50 min-h-screen bg-[url('/public/assets/wave.svg')] bg-no-repeat bg-bottom bg-fixed"
   >
-    <div class="flex justify-between py-6 lg:px-80 px-6 items-center">
-      <a href="#" class="flex items-center gap-2">
-        <svg class="h-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-        </svg>
-        <span class="text-xl font-black uppercase">Online Ariza</span>
-      </a>
-      <div class="">
-        <a
-          href="#"
-          class="text-md rounded-md bg-green-600 py-3 px-5 text-white font-semibold shadow-lg hover:shadow-xl 
-            focus:shadow-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 
-            focus:ring-offset-2 transition duration-150 ease-in-out"
-          >
-          @desktop
-            Ariza holatini tekshirish
-          @elsedesktop
-             Ariza holati
-          @enddesktop
-          </a
-        >
-      </div>
-    </div>
+ 
+    
+    @include('modal')
     <div class="flex flex-col justify-center p-6 pb-12">
         <div class="max-w-md mx-auto">
             <!-- <svg class="h-12 text-green-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -112,7 +92,7 @@
                       <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />uni
                     </svg>                    
                   </div>
-                  <input type="number" id="phone_number" onkeydown="if (event.key === '-' || event.key === 'e' || event.key === '.') event.preventDefault();" name="telefon" value="{{old('telefon')}}" class="w-full pl-10 rounded-md text-sm @if($errors->has('telefon')) border-red-300
+                  <input type="number" id="phone_number" onkeydown="if (event.key === '-' || event.key === ',' || event.key === 'E' || event.key === 'e' || event.key === '.') event.preventDefault();" name="telefon" value="{{old('telefon')}}" class="w-full pl-10 rounded-md text-sm @if($errors->has('telefon')) border-red-300
                   focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif" placeholder="+998(00 000 00 00)">
               </div>
               @if($errors->has('telefon'))
@@ -493,5 +473,7 @@
       const pond = FilePond.create(inputElement);
 
     </script>
+
+    
   </body>
 </html>
