@@ -28,6 +28,8 @@
                 <img class="object-cover w-full h-64" 
                     @if ($hulosa['holat'] == "maqullandi")
                         src="{{ asset('assets/success.gif')}}"
+                    @elseif($hulosa['holat'] == "rad_etildi")                
+                        src="{{ asset('assets/fail.gif')}}"
                     @else
                         src="{{ asset('assets/hali-tekshiruvda.gif')}}"
                     @endif                
@@ -41,7 +43,7 @@
                                 Arizangizga javob berilmagan! 
                             @endif                            
                         </span>
-                        <p class="block mt-2 pb-4 text-center text-xl font-semibold capitalize text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
+                        <p class="block mt-2 pb-4 text-center text-[24px] font-semibold capitalize text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
                            @if ($hulosa)
                                 {{ $hulosa['fish']}}
                            @endif
@@ -51,9 +53,15 @@
                            @else
                                 <b class="normal-case">sizning arizangiz ko'rib chiqilmoqda!</b>
                            @endif
-                           
+
+                            <hr>
+                            @if($hulosa['holat'] == "maqullandi")
+                                <h2 class="text-center normal-case text-green-700 text-xl font-bold mt-3">Ariza natijasi: <b>Sizga TTJdan joy ajratiladi.</b></h2>
+                            @elseif($hulosa['holat'] == "rad_etildi")
+                                <h2 class="text-center normal-case text-red-700 text-xl font-bold mt-3">Ariza natijasi: <b>Sizning arizangiz rad etildi.</b></h2>
+                            @endif
                         </p>
-                        <p class="mt-2 p-4 text-md text-gray-600 dark:text-gray-400">
+                        <p class="mt-6 p-4 text-md border border-gray-200 rounded-md text-gray-600 dark:text-gray-400">
                            
                             @if ($hulosa['message'] == null)
                                 Hurmatli talaba {{ $hulosa['fish']}} sizning arizangiz ayni damda tekshirish jarayonida va tez orada arizangiz ko'rib chiqiladi!
@@ -80,7 +88,7 @@
                 <img class="object-cover w-full h-64" src="{{ asset('assets/fail.gif')}}" alt="Article">            
                 <div class="p-6">
                     <div>                       
-                        <p class="block mt-2 pb-4 text-center text-xl font-semibold capitalize text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
+                        <p class="block mt-2 pb-4 text-center text-[24px]  font-semibold capitalize text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
                            Bunday ID raqamdagi ariza topilmadi!                           
                         </p>
                         <p class="mt-2 p-4 text-md text-gray-600 dark:text-gray-400">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreapplicationRequest extends FormRequest
@@ -23,8 +24,18 @@ class StoreapplicationRequest extends FormRequest
     {
         return [
             'fish' => 'required|min:5|max:50',           
-            'pass_info' => 'required|unique:applications|min:2|max:25',         
-            'telefon' => 'required|unique:applications|min:4|max:18',
+            'pass_info' => [
+                'required',
+                Rule::unique('applications')->whereNull('deleted_at'),
+                'min:2',
+                'max:25',
+            ],         
+            'telefon' => [
+                'required',
+                Rule::unique('applications')->whereNull('deleted_at'),
+                'min:4',
+                'max:18',
+            ],
             'fakultet' => 'required|min:1|max:25',
             'yonalish' => 'required|min:1|max:100',
             'kurs_nomeri' => 'required|min:1|max:10',

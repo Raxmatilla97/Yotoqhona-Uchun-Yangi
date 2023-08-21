@@ -1,4 +1,3 @@
-   
     <div class="flex justify-between p-6 items-center">
         <a href="{{'/'}}" class="flex items-center gap-2">
           <svg class="h-10 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -12,10 +11,9 @@
             class="text-sm rounded-md bg-green-600 py-2 px-4 text-white font-semibold shadow-lg hover:shadow-xl 
               focus:shadow-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 
               focus:ring-offset-2 transition duration-150 ease-in-out"
-            >Ariza holati</
-          >
+            >Ariza holati</>
         </div>
-      </div>
+    </div>
     
     <!-- Modal -->
     <div id="modal5" class="fixed inset-0 flex  items-center justify-center z-10 hidden bg-gray-500 bg-opacity-75">
@@ -25,6 +23,9 @@
                 @method('post') 
                 <h2 class="text-xl font-bold mb-4 text-center">Ariza holatini tekshirish</h2>
                 <p>Arizangiz holatini tekshirish uchun sizga berilgan ID raqamni bu yerga yozing.</p>
+                <b class="mt-3">Yuborilgan arizalar soni: @php echo $users = DB::table('applications')->count(); @endphp ta</b>
+                <b class="mt-1">Maqullangan arizalar soni: @php echo $users = DB::table('applications')->where('holat', '=', 'maqullandi')->count(); @endphp ta</b> 
+                <b class="mt-1">Rad etilgan arizalar soni: @php echo $users = DB::table('applications')->where('holat', '=', 'rad_etildi')->count(); @endphp ta</b> 
                 <div class="relative rounded-md shadow-sm mt-1">
                     <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
                        

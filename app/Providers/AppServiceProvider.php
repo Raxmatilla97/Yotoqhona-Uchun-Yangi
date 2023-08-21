@@ -20,5 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+        \Carbon\Carbon::setLocale('uz_UZ');
+        date_default_timezone_set('Asia/Tashkent');
     }
 }

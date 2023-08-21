@@ -4,12 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\TestController;
+use Illuminate\Support\Facades\Auth;
 
-
-
-Route::get('/', function () {
-    return view('index');
-})->name('site');
+// Arizalarni yuborish sahifasi
+Route::get('/', [ApplicationController::class, 'arizalarniYuborish'])->name('site');
 
 // Ro'yxatdan o'tganlik haqida habar va ID kod beradigan qism
 Route::get('/confirm', function () {
@@ -36,12 +34,27 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
 | Boshqaruv panelini routerlari
 |--------------------------------------------------------------------------    
 */
-Route::middleware(['auth', 'verified'])->group(function () {
 
-    // Boshqaruv paneli asosiy sahifasini routeri
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');    
+    Route::middleware(['auth', 'verified'])->group(function () {
+
+        Route::middleware(['auth', 'check.user:1'])->group(function () {
+            // Adminlarni routeri
+            Route::get('/dashboard/admin-register', function () {
+                return view('auth.register');
+            })->name('admin-register'); 
+
+            // Adminlar ro'yxati
+            Route::get('/dashboard/adminlar', [ApplicationController::class, 'adminlar'])->name('adminlar');
+
+            // Adminnni o'chirish routeri
+            Route::delete('/dashboard/admin-delete/{id}', [ApplicationController::class, 'adminDelete'])->name('adminDelete');
+
+            // Admin registratsiya qismi
+            Route::post('/dashboard/admin-register', [ApplicationController::class, 'adminRegisterStore'])->name('admin-register-store');
+        });
+
+    
+    
     Route::get('/dashboard', [ApplicationController::class, 'dashboard'])->name('dashboard');
     
     /*
@@ -71,8 +84,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Talabalardan kelib tushgan arizlalarnini tahrirlash
     Route::post('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'tahrirlash'])->name('kelgan-arizalarni-tahrirlash');
 
+    // Arizalarni qidirish
+    Route::post('/dashboard/arizalarni qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
+
     // Talabalardan kelib tushgan arizlalarnini o'chirish
-    Route::get('/dashboard/kelgan-arizalarni-ochirish', [ApplicationController::class, 'delete'])->name('kelgan-arizalarni-ochirish');
+    Route::delete('/dashboard/kelgan-arizalarni-ochirish/{id}', [ApplicationController::class, 'destroy'])->name('kelgan-arizalarni-ochirish');
 
     /*
     |--------------------------------------------------------------------------
@@ -96,5 +112,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';

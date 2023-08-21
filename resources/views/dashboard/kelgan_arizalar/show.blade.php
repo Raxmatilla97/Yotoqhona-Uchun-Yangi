@@ -11,11 +11,14 @@
                 <div class=" p-6 text-gray-900 dark:text-gray-100">
                     <!-- show -->
                     <section class="container px-4 mx-auto">
-                        <div class="flex items-center gap-x-3">
+                        
+                        <span class="px-3 py-1 mb-4 text-xs flex justify-center text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{{ $ariza->created_at->diffForHumans() }} arizasini yuborgan | Aniq vaqti: {{ $ariza->created_at->format('Y-M-d H:i') }}</span>
+                        <div class="flex items-center mt-4 gap-x-3">
                             <h2 class="text-lg font-medium text-gray-800 dark:text-white">Ariza raqami:</h2>
-
-                            <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">ID-{{ $ariza->id }}</span>
-                        </div>                  
+                            <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">ID-{{ $ariza->id }} </span>
+                           
+                        </div>  
+                                  
                        
                             <div class="sm:flex sm:items-center sm:justify-between">
                            
@@ -24,7 +27,8 @@
         
                                     <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">G-{{ $ariza->number_generation }}</span>
                                 </div>
-                        
+                                
+                            
                                 <div class="flex items-center mt-4 gap-x-3">
                                     <button id="btn1" class="w-1/2 px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
                                         Chop etish
@@ -67,6 +71,7 @@
                             
                                                             <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                             Savollarga berilgan javoblar:
+                                                           
                                                             </th>
                             
                                                         </tr>
@@ -304,7 +309,7 @@
                                                                 <label for="large" class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Arizani maqullanganligi yoki rad etilganligini belgilang.</label>
                                                                 <select id="large" name="holat"  class="block w-full px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                     <option selected>Tanlang</option>
-                                                                    <option value="korib_chiqilmoqda"{{ "korib_chiqilmoqda" === old('holat') || $ariza->holat === "korib_chiqilmoqda" ? 'selected' : '' }}>Ko'rilmagan</option>
+                                                                    <option value="korib_chiqilmoqda"{{ "korib_chiqilmoqda" === old('holat') || $ariza->holat === "korib_chiqilmoqda" ? 'selected' : '' }}>Ko'rib chiqilmoqda</option>
                                                                     <option value="maqullandi" {{ "maqullandi" === old('holat') || $ariza->holat === "maqullandi" ? 'selected' : '' }}>Maqullandi!</option>
                                                                     <option value="rad_etildi" {{ "rad_etildi" === old('holat')  || $ariza->holat === "rad_etildi" ? 'selected' : '' }}>Rad etildi!</option>              
                                                                 </select>

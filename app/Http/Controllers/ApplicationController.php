@@ -7,15 +7,27 @@ use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreapplicationRequest;
 use App\Http\Requests\UpdateapplicationRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
+
+    public function arizalarniYuborish()
+    {   
+        return view('index');
+    }
+
+
     /**
      * Resurs ro'yxatini ko'rsatish.
      */
     public function index()
     {
-        $arizalar = Application::paginate(15);
+        $arizalar = Application::orderBy('created_at', 'desc')->paginate(15);
         $arizalar = $this->filterArizalar($arizalar);  
 
         return view('dashboard.kelgan_arizalar.list')->with([
@@ -54,14 +66,15 @@ class ApplicationController extends Controller
     public function tahrirlash(UpdateapplicationRequest $request)
     {   
         $data = $request->all();
+        $data['tekshirgan_user_id'] = Auth::id();
         $application = Application::find($data['id']);
         $name = $application->fish;
         
         $application->update($data);
 
-        return redirect()->route('kelgan-arizalar')->with(
+        return redirect()->route('korilmagan-arizalar')->with(
         [
-            'status' => true,
+            // 'status' => true,
             'name' => $name
         
         ]);
@@ -124,14 +137,25 @@ class ApplicationController extends Controller
     /**
      * Arizani o'chirish.
      */
-    public function destroy(application $application)
+    public function destroy($id)
     {
-        //
+        $application = Application::find($id);
+        
+        if (!$application) {
+            return redirect()->back()->with('error', 'Ariza topilmadi'); // Ariza topilmadi xabarini qaytarish
+        }
+        
+        $application->delete();
+        
+        return redirect()->back()->with('status', "Ro'yxatdan ariza o'chirildi!");
     }
 
+    /**
+     * Maqullangan arizalar uchun
+     */
     public function maqullanganArizalar()
     {
-        $arizalar = Application::where('holat', 'maqullandi')->paginate(15);
+        $arizalar = Application::where('holat', 'maqullandi')->orderBy('created_at', 'desc')->paginate(15);
        
         $arizalar = $this->filterArizalar($arizalar);
 
@@ -145,7 +169,7 @@ class ApplicationController extends Controller
      */
     public function radEtilganArizalar()
     {
-        $arizalar = Application::where('holat', 'rad_etildi')->paginate(15);
+        $arizalar = Application::where('holat', 'rad_etildi')->orderBy('created_at', 'desc')->paginate(15);
 
         $arizalar = $this->filterArizalar($arizalar);
 
@@ -159,7 +183,7 @@ class ApplicationController extends Controller
      */
     public function korilmaganArizalar()
     {
-        $arizalar = Application::where('holat', 'korib_chiqilmoqda')->paginate(15);
+        $arizalar = Application::where('holat', 'korib_chiqilmoqda')->orderBy('created_at', 'desc')->paginate(15);
 
         $arizalar = $this->filterArizalar($arizalar);
 
@@ -178,7 +202,7 @@ class ApplicationController extends Controller
         $arizalar_rad_etildi = Application::where('holat', 'rad_etildi')->count();
         $arizalar_korilmagan = Application::where('holat', 'korib_chiqilmoqda' )->count();
 
-        $arizalar = Application::where('holat', 'korib_chiqilmoqda')->paginate(10);
+        $arizalar = Application::where('holat', 'korib_chiqilmoqda')->orderBy('created_at', 'desc')->paginate(10);
         $arizalar = $this->filterArizalar($arizalar);  
 
 
@@ -189,6 +213,39 @@ class ApplicationController extends Controller
             'arizalar_rad_etildi' => $arizalar_rad_etildi,
             'arizalar_korilmagan' => $arizalar_korilmagan
         ]);
+    }
+
+     /**
+     * Boshqaruv panelida arizani qidirish controlleri
+     */
+    public function arizalarniQidrish(Request $request)
+    {
+        $fish = $request->input('fish');
+        $passInfo = $request->input('pass_info');
+        $telefon = $request->input('telefon');
+        $numberGeneration = $request->input('number_generation');
+    
+        $query = Application::query();
+    
+        if ($fish) {
+            $query->where('fish', 'like', '%' . $fish . '%');
+        }
+    
+        if ($passInfo) {          
+            $query->where('pass_info', 'like', '%' . $passInfo . '%');
+        }
+    
+        if ($telefon) {
+            $query->where('telefon', 'like', '%' . $telefon . '%');          
+        }
+    
+        if ($numberGeneration) {
+            $query->where('number_generation', $numberGeneration);
+        }
+    
+        $arizalar = $query->paginate(10);
+
+        return view('dashboard.kelgan_arizalar.list', compact('arizalar'));
     }
 
     /**
@@ -319,6 +376,46 @@ class ApplicationController extends Controller
 
         return $ariza;
     }
+
+
+    public function adminRegisterStore(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('dashboard')->with('toast', "Yangi admin ro'yxatga qo'shildi!");
+
+    }
+
+    public function adminlar(){
+            $adminlar = User::paginate(10);
+         
+            return  view('adminlar')->with('adminlar', $adminlar);
+    }
+
+    public function adminDelete($id)
+    {
+       
+        $user = User::find($id);
+        
+        if (!$user) {
+            return redirect()->back()->with('error', 'Admin topilmadi'); // Ariza topilmadi xabarini qaytarish
+        }
+        
+        $user->delete();
+        
+        return redirect()->back()->with('status', "Ro'yxatdan admin o'chirildi!");
+    }
+
 
 
 

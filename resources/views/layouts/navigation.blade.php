@@ -21,12 +21,60 @@
                         {{ __("Barcha arizalar ro'yxati") }}
                     </x-nav-link>
                 </div>              
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">                  
+                    <button id="openModal"  class="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Ariza qidirish
+                    </button>
+                </div>
+                @if( Auth::id() == '1')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('kelgan-arizalar')" :active="request()->routeIs('kelgan-arizalar')">
-                        {{ __('Ariza qidirish') }}
+                    <x-nav-link :href="route('adminlar')" :active="request()->routeIs('adminlar')">
+                        {{ __("Adminlar ro'yxati") }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    {{-- <x-nav-link :href="route('admin-register')" :active="request()->routeIs('admin-register')">
+                        {{ __("Admin qo'shish") }}
+                    </x-nav-link> --}}
+                    <button id="adminButton" class="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded">Admin Qo'shish</button>
+                </div>
+                @endif
             </div>
+
+
+
+            <div id="adminModal" class="fixed inset-0 flex items-center justify-center z-50 hidden bg-gray-500 bg-opacity-75">
+                <div class="bg-white rounded-lg p-8 w-[400px]">                   
+                    @include('auth.register')
+                    <button id="closeButton" type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4">
+                        Yopish
+                    </button>
+
+                </div>
+            </div>
+            
+            <script>
+                // Modalı açmak için düğmeye tıklama olayı
+                var adminButton = document.getElementById("adminButton");
+                var adminModal = document.getElementById("adminModal");
+                var closeButton = document.getElementById("closeButton");
+
+                adminButton.addEventListener("click", function() {
+                adminModal.classList.remove("hidden");
+                });
+
+                // Modalı kapatmak için kapatma düğmesine tıklama olayı
+                closeButton.addEventListener("click", function() {
+                adminModal.classList.add("hidden");
+                });
+
+                // Modalı kapatmak için modal dışına tıklama olayı
+                window.addEventListener("click", function(event) {
+                if (event.target === adminModal) {
+                    adminModal.classList.add("hidden");
+                }
+                });
+            </script>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -109,3 +157,49 @@
         </div>
     </div>
 </nav>
+
+<div id="modal1" class="fixed inset-0 flex items-center justify-center z-50 hidden bg-gray-500 bg-opacity-75">
+    <div class="bg-white rounded-lg p-8 w-[400px]">
+        <div class="w-full text-white bg-sky-500 mb-6">
+            <div class="container flex items-center justify-between px-6 py-4 mx-auto">
+                <div class="flex">
+                    <svg viewBox="0 0 40 40" class="w-20 h-20 fill-current">
+                        <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z">
+                        </path>
+                    </svg>        
+                    <p class="mx-3 text-sm">Quyidagi maydonlardan biriga ariza ma'lumotini yozing va qidirish tugmasini bosing. (Barcha maydonlarni to'ldirish shart emas!)</p>
+                </div>       
+               
+            </div>
+        </div>
+        <form action="{{ route('arizalarni-qidirish')}}" method="POST" class="flex flex-col">
+            @csrf
+            @method('post')
+            <h2 class="text-xl font-bold mb-4">Ariza qidirish</h2>
+            <input type="text" name="fish" placeholder="F.I.Sh" class="mb-4">
+            <input type="text" name="pass_info" placeholder="Passport ma'lumotlari" class="mb-4">
+            <input type="text" name="telefon" placeholder="Telefon raqam" class="mb-4">
+            <input type="text" name="number_generation" placeholder="ID raqam" class="mb-4">
+            <div class="flex justify-between">
+                <button id="closeBtn1" type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4">
+                    Yopish
+                </button>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Qidirish
+                </button>
+                
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('openModal').addEventListener('click', function() {
+    document.getElementById('modal1').classList.remove('hidden');
+    });
+
+    document.getElementById('closeBtn1').addEventListener('click', function() {
+    document.getElementById('modal1').classList.add('hidden');
+    });
+</script>
