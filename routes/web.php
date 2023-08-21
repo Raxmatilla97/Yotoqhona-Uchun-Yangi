@@ -96,6 +96,13 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
     |--------------------------------------------------------------------------    
     */
 
+    // Route::get('/dashboard/pdf-down', function () {
+    //     return view('pdf');
+    // })->name('dashboard.pdf');
+
+     // Arizani yuklab olish
+     Route::get('/dashboard/pdf-yuklash/{id}', [ApplicationController::class, 'pdfYuklash'])->name('pdf-yuklash');
+
     Route::get('/dashboard/ariza-qidirish', function () {
         echo "Ariza qidirish sahifasi bo'ladi!";
     })->name('dashboard.ariza-qidirish');
