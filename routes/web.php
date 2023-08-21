@@ -85,7 +85,7 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
     Route::post('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'tahrirlash'])->name('kelgan-arizalarni-tahrirlash');
 
     // Arizalarni qidirish
-    Route::post('/dashboard/arizalarni qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
+    Route::post('/dashboard/arizalarni-qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
 
     // Talabalardan kelib tushgan arizlalarnini o'chirish
     Route::delete('/dashboard/kelgan-arizalarni-ochirish/{id}', [ApplicationController::class, 'destroy'])->name('kelgan-arizalarni-ochirish');
@@ -103,9 +103,9 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
      // Arizani yuklab olish
      Route::get('/dashboard/pdf-yuklash/{id}', [ApplicationController::class, 'pdfYuklash'])->name('pdf-yuklash');
 
-    Route::get('/dashboard/ariza-qidirish', function () {
-        echo "Ariza qidirish sahifasi bo'ladi!";
-    })->name('dashboard.ariza-qidirish');
+    // Route::get('/dashboard/ariza-qidirish', function () {
+    //     echo "Ariza qidirish sahifasi bo'ladi!";
+    // })->name('dashboard.ariza-qidirish');
 });
 
 /*

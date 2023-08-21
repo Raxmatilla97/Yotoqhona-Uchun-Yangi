@@ -13,6 +13,8 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
+use PDF;
+
 class ApplicationController extends Controller
 {
 
@@ -414,6 +416,40 @@ class ApplicationController extends Controller
         $user->delete();
         
         return redirect()->back()->with('status', "Ro'yxatdan admin o'chirildi!");
+    }
+
+    public function pdfYuklash($request) 
+    {
+        $ariza = Application::where('id', $request)->first();
+
+        
+        
+        if ($ariza) {
+            $data = [
+                'fish' => 'Welcome to laratutorials.com',
+                'date' => date('m/d/Y'),
+                'number_generation' => $ariza['number_generation'],
+                'holat' => $ariza['holat'],
+                'pass_info' => $ariza['pass_info'],
+                'telefon' => $ariza['telefon'],
+                'fakultet' => $ariza['fakultet'],
+                'yonalish' => $ariza['yonalish'],
+                'kurs_nomeri' => $ariza['kurs_nomeri'],
+                'guruhi' => $ariza['guruhi'],
+                'mezon' => $ariza['mezon'],
+                'document' => $ariza['document'],
+                'message' => $ariza['message'],
+               
+            ];           
+                       
+            $pdf = PDF::loadView('pdf', ['data' => $data]);
+            
+            return $pdf->download('laratutorials.pdf');
+        }
+    
+        // Handle the case when $ariza is not found
+        // You can redirect or return an error message
+        return redirect()->back()->with('error', 'Invalid application ID');
     }
 
 

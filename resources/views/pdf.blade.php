@@ -33,15 +33,15 @@
                 </tr>
                 <tr style="height: 18px; text-align: justify;">
                 <td style="width: 30.0666%; height: 18px;">
-                <p class="font-normal text-gray-800 dark:text-white ">Tahsil olayotgan fakultet']i:</p>
+                <p class="font-normal text-gray-800 dark:text-white ">Tahsil olayotgan fakulteti:</p>
                 </td>
-                <td style="width: 46.5502%; height: 18px;">{{ $data['fakultet']']}}</td>
+                <td style="width: 46.5502%; height: 18px;">{{ $data['fakultet']}}</td>
                 </tr>
                 <tr style="height: 18px; text-align: justify;">
                 <td style="width: 30.0666%; height: 18px;">
                 <p class="font-normal text-gray-800 dark:text-white ">Tahsil olayotgan yo'nalishi:</p>
                 </td>
-                <td style="width: 46.5502%; height: 18px;">{{ $data['yonalish']']}}</td>
+                <td style="width: 46.5502%; height: 18px;">{{ $data['yonalish']}}</td>
                 </tr>
                 <tr style="height: 18px; text-align: justify;">
                 <td style="width: 30.0666%; height: 18px;">
