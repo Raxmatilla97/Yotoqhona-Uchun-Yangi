@@ -30,9 +30,7 @@
                                 
                             
                                 <div class="flex items-center mt-4 gap-x-3">
-                                    <button id="btn1" class="w-1/2 px-5 py-2 text-sm text-gray-800 transition-colors duration-200 bg-white border rounded-lg sm:w-auto dark:hover:bg-gray-800 dark:bg-gray-900 hover:bg-gray-100 dark:text-white dark:border-gray-700">
-                                        Chop etish
-                                    </button>
+                                   
                                     <a href="{{ route('pdf-yuklash', $ariza->id)}}">
                                     <button class="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

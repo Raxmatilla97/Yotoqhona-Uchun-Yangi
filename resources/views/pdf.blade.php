@@ -10,7 +10,8 @@
 
         <div class="container">
             <h3 style="text-align: center; margin-bottom:80px"><strong>OTM TTJga joylashish bo'yicha ariza matni&nbsp;&nbsp;</strong></h3>
-            <p style="text-align: left;">Yuborilgan: {{$data['date']}}</p>
+            <p style="text-align: left;">Yuborilgan: {{$data['created_at']}}</p>
+            <p style="text-align: left;">ID: {{$data['id']}} | G-{{ $data['number_generation']}}</p>
             <table style="border-collapse: collapse; width: 100%; height: 399px;" border="1">
                 <tbody>
                 <tr style="height: 18px; text-align: justify;">
