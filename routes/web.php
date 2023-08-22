@@ -85,7 +85,7 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
     Route::post('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'tahrirlash'])->name('kelgan-arizalarni-tahrirlash');
 
     // Arizalarni qidirish
-    Route::post('/dashboard/arizalarni-qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
+    Route::get('/dashboard/arizalarni-qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
 
     // Talabalardan kelib tushgan arizlalarnini o'chirish
     Route::delete('/dashboard/kelgan-arizalarni-ochirish/{id}', [ApplicationController::class, 'destroy'])->name('kelgan-arizalarni-ochirish');

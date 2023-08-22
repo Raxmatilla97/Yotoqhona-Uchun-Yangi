@@ -172,9 +172,9 @@
                
             </div>
         </div>
-        <form action="{{ route('arizalarni-qidirish')}}" method="POST" class="flex flex-col">
+        <form action="{{ route('arizalarni-qidirish')}}" method="GET" class="flex flex-col">
             @csrf
-            @method('post')
+            @method('GET')
             <h2 class="text-xl font-bold mb-4">Ariza qidirish</h2>
             <input type="text" name="fish" placeholder="F.I.Sh" class="mb-4">
             <input type="text" name="pass_info" placeholder="Passport ma'lumotlari" class="mb-4">
