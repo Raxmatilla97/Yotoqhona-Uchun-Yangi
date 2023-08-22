@@ -244,17 +244,23 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
+                                                            <td class="px-12 py-4 text-sm font-normal text-gray-700 whitespace-wrap">
                                                                 @if($ariza->mezon == 'mehribonlik_uylari_tarbiyalanuvchilari')
-                                                                    Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)
-                                                                @elseif($ariza->mezon == 'chin_yetimlar')
-                                                                    Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)
+                                                                    “Mehribonlik uylari” tarbiyalanuvchilari, yetim va ota-ona qaramog‘idan mahrum bo‘lgan talabalar
+                                                                @elseif($ariza->mezon == 'bir_oiladan')
+                                                                    Bir oiladan bakalavriat bosqichi kunduzgi ta’lim shaklida ikki yoki undan ortiq to‘lov-shartnoma asosida o‘qiyotgan oilalar farzandlari
                                                                 @elseif($ariza->mezon == 'nogironligi_bor')
-                                                                    I va II-guruh nogironligi bo‘lgan shaxslar
+                                                                    I va II guruh nogironligi bo‘lgan talabalar
                                                                 @elseif($ariza->mezon == 'ijtimoiy_himoya')
-                                                                    “Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam <br> ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda <br> axborot tizimiga kiritilgan oilalar hisobga olinadi).
-                                                                @elseif($ariza->mezon == 'uzoq_viloyatdagi_talabalar')
-                                                                    Uzoq viloyatlardagi talabalar (Toshkent viloyatidan tashqari)
+                                                                    “Ijtimoiy himoya yagona reyestri”, “Temir daftar” va “Ayollar daftari”ga kiritilgan ijtimoiy himoyaga muhtoj oilalarning farzandlari hamda “Yoshlar daftari”da turadigan talabalar
+                                                                @elseif($ariza->mezon == 'xalqaro_fan_olimpiadalari')
+                                                                    Xalqaro fan olimpiadalari, Oliy ta’lim, fan va innovatsiyalar vazirligi tomonidan o‘tkaziladigan respublika fan olimpiadalarida g‘olib bo‘lgan talabalar
+                                                                @elseif($ariza->mezon == 'yil_talabasi')
+                                                                    “Yil talabasi” va “Talabalar teatr studiyalari” ko‘rik tanlovlarining respublika bosqichida g‘olib bo‘lgan talabalar
+                                                                @elseif($ariza->mezon == 'otm_talabalari')
+                                                                    OTM talabalari o‘rtasida o‘tkazilgan “Zakovat” intellektual o‘yinining respublika bosqichida g‘oliblikni qo‘lga kiritgan talabalar
+                                                                @elseif($ariza->mezon == 'kengash_raisi')
+                                                                    Talabalar turar joyida talabalar kengashi raisi, qavat sardori bo‘lgan talabalar
                                                                 @endif                                                           
                                                             </td>
                                                             
@@ -327,21 +333,28 @@
                                                                             </svg>                                                                          
                                                                         </div>                                                                    
                                                                         <div>
-                                                                            <h2 class="font-normal text-gray-800 dark:text-white ">Arizachiga xabar qoldirish.</h2>                                                                     
+                                                                            <h2 class="font-normal text-gray-800">Arizachiga xabar qoldirish.</h2>                                                                     
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td class="border-r border-b border-t border-blue-500 px-12 py-4 text-sm font-normal text-gray-700 whitespace-nowrap">
-                                                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sizning talabaga javobingiz:</label>
-                                                                <textarea id="message" name="message" value="{{old('message')}}" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Assalomu alaykum, hurmatli.....">{{ $ariza->message }}
+                                                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 ">Sizning talabaga javobingiz:</label>
+                                                                <textarea id="message" name="message" value="{{old('message')}}" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Assalomu alaykum, hurmatli.....">{{ $ariza->message }}
                                                                 </textarea>                                                                
                                                             </td>
                                                            
                                                         </tr>
-                                                    
-                            
-                                                    
+                                                           <script>
+                                                            var textarea = document.getElementById('message'); // textarea elementini identifikator orqali tanlash
+                                                            var text = textarea.value; // textarea'dagi matnni olish
+
+                                                            // Ortqicha satr va boshlang'ich/oxirgi bo'shliklarni olib tashlash
+                                                            text = text.trim();
+
+                                                            // Yangi qiymatni textarea'ga qaytaring
+                                                            textarea.value = text;
+                                                           </script>
                                                     </tbody>
                                                   
                                                 </table>

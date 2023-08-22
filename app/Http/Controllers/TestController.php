@@ -5,6 +5,11 @@ use App\Models\Application;
 use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Validation\ValidationException;
+
 class TestController extends Controller
 {
     /**
@@ -67,19 +72,48 @@ class TestController extends Controller
 
     public function tmpUpload(Request $request) {    
 
+        $validator = Validator::make($request->all(), [
+            'document' => 'required|mimes:png,pdf,doc,docx,zip,rar,jpeg,jpg|max:5048',
+        ]);
+    
+        if ($validator->fails()) {
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $file->storeAs('vaqtincha/tmp', $file->getClientOriginalName());
+                Storage::delete(storage_path('app/vaqtincha/tmp/' . $file->getClientOriginalName()));
+            }
+    
+            throw new ValidationException($validator);
+        }
+    
         if ($request->hasFile('document')) {
             $file = $request->file('document');
-            $filename = $file->getClientOriginalName();            
+            $filename = $file->getClientOriginalName();
             $folder = uniqid('vaqtincha', true);
             $file->storeAs('vaqtincha/tmp/' . $folder, $filename);
             TemporaryFile::create([
                 'folder' => $folder,
                 'file' => $filename
             ]);
-           
+    
             return $folder;
         }
-        
+    
         return '';
+
+        // if ($request->hasFile('document')) {
+        //     $file = $request->file('document');
+        //     $filename = $file->getClientOriginalName();            
+        //     $folder = uniqid('vaqtincha', true);
+        //     $file->storeAs('vaqtincha/tmp/' . $folder, $filename);
+        //     TemporaryFile::create([
+        //         'folder' => $folder,
+        //         'file' => $filename
+        //     ]);
+           
+        //     return $folder;
+        // }
+        
+        // return '';
     }
 }

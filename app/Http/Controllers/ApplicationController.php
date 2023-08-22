@@ -531,15 +531,21 @@ class ApplicationController extends Controller
         }
 
         if ($ariza['mezon'] == 'mehribonlik_uylari_tarbiyalanuvchilari') {
-            $ariza['mezon'] = "Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)";
-        } elseif($ariza['mezon'] == 'chin_yetimlar') {
-            $ariza['mezon'] = "Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)";
+            $ariza['mezon'] = "“Mehribonlik uylari” tarbiyalanuvchilari, yetim va ota-ona qaramog‘idan mahrum bo‘lgan talabalar";
+        } elseif($ariza['mezon'] == 'bir_oiladan') {
+            $ariza['mezon'] = "Bir oiladan bakalavriat bosqichi kunduzgi ta’lim shaklida ikki yoki undan ortiq to‘lov-shartnoma asosida o‘qiyotgan oilalar farzandlari";
         } elseif($ariza['mezon'] == 'nogironligi_bor') {
-            $ariza['mezon'] = "I va II-guruh nogironligi bo‘lgan shaxslar";
+            $ariza['mezon'] = "I va II guruh nogironligi bo‘lgan talabalar";
         } elseif($ariza['mezon'] == 'ijtimoiy_himoya') {
-            $ariza['mezon'] =  "“Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).";
-        } elseif($ariza['mezon'] == 'uzoq_viloyatdagi_talabalar') {
-            $ariza['mezon'] = "Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)";
+            $ariza['mezon'] =  "“Ijtimoiy himoya yagona reyestri”, “Temir daftar” va “Ayollar daftari”ga kiritilgan ijtimoiy himoyaga muhtoj oilalarning farzandlari hamda “Yoshlar daftari”da turadigan talabalar";
+        } elseif($ariza['mezon'] == 'xalqaro_fan_olimpiadalari') {
+            $ariza['mezon'] = "Xalqaro fan olimpiadalari, Oliy ta’lim, fan va innovatsiyalar vazirligi tomonidan o‘tkaziladigan respublika fan olimpiadalarida g‘olib bo‘lgan talabalar";
+        }elseif($ariza['mezon'] == 'yil_talabasi') {
+            $ariza['mezon'] = "“Yil talabasi” va “Talabalar teatr studiyalari” ko‘rik tanlovlarining respublika bosqichida g‘olib bo‘lgan talabalar";
+        }elseif($ariza['mezon'] == 'otm_talabalari') {
+            $ariza['mezon'] = "OTM talabalari o‘rtasida o‘tkazilgan “Zakovat” intellektual o‘yinining respublika bosqichida g‘oliblikni qo‘lga kiritgan talabalar";
+        }elseif($ariza['mezon'] == 'kengash_raisi') {
+            $ariza['mezon'] = "Talabalar turar joyida talabalar kengashi raisi, qavat sardori bo‘lgan talabalar";
         }
 
         if ($ariza['holat'] == "korib_chiqilmoqda") {

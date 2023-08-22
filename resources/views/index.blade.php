@@ -288,32 +288,50 @@
               <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-700 @else border-gray-200 @endif">
                   <div class="flex items-center pl-3">
                       <input id="mehribonlik_uylari_tarbiyalanuvchilari" type="radio" @if(old('mezon') == 'mehribonlik_uylari_tarbiyalanuvchilari') checked @endif value="mehribonlik_uylari_tarbiyalanuvchilari" name="mezon" class="w-4 h-4 focus:ring-2  text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
-                      <label for="mehribonlik_uylari_tarbiyalanuvchilari" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">Mehribonlik uylari tarbiyalanuvchilari (to‘liq davlat ta’minotida bo‘lgan bolalar)</label>
+                      <label for="mehribonlik_uylari_tarbiyalanuvchilari" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">“Mehribonlik uylari” tarbiyalanuvchilari, yetim va ota-ona qaramog‘idan mahrum bo‘lgan talabalar</label>
                   </div>
               </li>
               <li class="w-full border-b rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
                   <div class="flex items-center pl-3">
-                      <input id="chin_yetimlar" type="radio" @if(old('mezon') == 'chin_yetimlar') checked @endif  value="chin_yetimlar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                      <label for="chin_yetimlar" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">Chin yetimlar (ota-onasi vafot etgan, vasiylik va homiylikka olingan yetimlar)</label>
+                      <input id="bir_oiladan" type="radio" @if(old('mezon') == 'bir_oiladan') checked @endif  value="bir_oiladan" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                      <label for="bir_oiladan" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">Bir oiladan bakalavriat bosqichi kunduzgi ta’lim shaklida ikki yoki undan ortiq to‘lov-shartnoma asosida o‘qiyotgan oilalar farzandlari</label>
                   </div>
               </li>
               <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
                   <div class="flex items-center pl-3">
                       <input id="nogironligi_bor" type="radio" @if(old('mezon') == 'nogironligi_bor') checked @endif  value="nogironligi_bor" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                      <label for="nogironligi_bor" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">I va II-guruh nogironligi bo‘lgan shaxslar</label>
+                      <label for="nogironligi_bor" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">I va II guruh nogironligi bo‘lgan talabalar</label>
                   </div>
               </li>
               <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
                   <div class="flex items-center pl-3">
                       <input id="ijtimoiy_himoya" type="radio" @if(old('mezon') == 'ijtimoiy_himoya') checked @endif value="ijtimoiy_himoya" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                      <label for="ijtimoiy_himoya" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">“Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).</label>
+                      <label for="ijtimoiy_himoya" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">“Ijtimoiy himoya yagona reyestri”, “Temir daftar” va “Ayollar daftari”ga kiritilgan ijtimoiy himoyaga muhtoj oilalarning farzandlari hamda “Yoshlar daftari”da turadigan talabalar</label>
                   </div>
               </li>
               <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
                 <div class="flex items-center pl-3">
-                    <input id="uzoq_viloyatdagi_talabalar" type="radio" @if(old('mezon') == 'uzoq_viloyatdagi_talabalar') checked @endif value="uzoq_viloyatdagi_talabalar" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
-                    <label for="uzoq_viloyatdagi_talabalar" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">Uzoq viloyatlardagi talabalar (Toshkent viloyatidan tashqari)</label>
+                    <input id="xalqaro_fan_olimpiadalari" type="radio" @if(old('mezon') == 'xalqaro_fan_olimpiadalari') checked @endif value="xalqaro_fan_olimpiadalari" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                    <label for="xalqaro_fan_olimpiadalari" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">Xalqaro fan olimpiadalari, Oliy ta’lim, fan va innovatsiyalar vazirligi tomonidan o‘tkaziladigan respublika fan olimpiadalarida g‘olib bo‘lgan talabalar</label>
                 </div>
+            </li>
+            <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
+              <div class="flex items-center pl-3">
+                  <input id="yil_talabasi" type="radio" @if(old('mezon') == 'yil_talabasi') checked @endif value="yil_talabasi" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                  <label for="yil_talabasi" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">“Yil talabasi” va “Talabalar teatr studiyalari” ko‘rik tanlovlarining respublika bosqichida g‘olib bo‘lgan talabalar</label>
+              </div>
+            </li>
+            <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
+              <div class="flex items-center pl-3">
+                  <input id="otm_talabalari" type="radio" @if(old('mezon') == 'otm_talabalari') checked @endif value="otm_talabalari" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                  <label for="otm_talabalari" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">OTM talabalari o‘rtasida o‘tkazilgan “Zakovat” intellektual o‘yinining respublika bosqichida g‘oliblikni qo‘lga kiritgan talabalar</label>
+              </div>
+            </li>
+            <li class="w-full border-b  rounded-t-lg @if($errors->has('mezon')) border-red-600 @else border-gray-200 @endif">
+              <div class="flex items-center pl-3">
+                  <input id="kengash_raisi" type="radio" @if(old('mezon') == 'kengash_raisi') checked @endif value="kengash_raisi" name="mezon" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 ">
+                  <label for="kengash_raisi" class="w-full py-3 ml-2 text-sm font-medium @if($errors->has('mezon')) text-red-700  @else text-gray-900  @endif">Talabalar turar joyida talabalar kengashi raisi, qavat sardori bo‘lgan talabalar</label>
+              </div>
             </li>
           </ul>
           
@@ -339,7 +357,7 @@
           <label for="document" class=" w-full h-57 border-2 @if($errors->has('document')) border-red-300 border-dashed rounded-lg cursor-pointer bg-red-50  hover:bg-red-100  @else border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-100  @endif ">
              
 
-            <input type="file" name="document" data-max-file-size="5MB" />
+            <input type="file" class="text-md" value="{{ old('document')}}" name="document" data-max-file-size="5MB" />
              
           </label>           
       </div>        
@@ -447,29 +465,31 @@
     <script src="{{ asset('filepond.js')}}"></script>  
     <script>
       // Register the plugins
-      FilePond.registerPlugin(FilePondPluginFileValidateSize, FilePondPluginFileValidateType);
+        FilePond.registerPlugin(FilePondPluginFileValidateSize, FilePondPluginFileValidateType);
 
-      // Set options
-      FilePond.setOptions({
-          acceptedFileTypes: ['image/png', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/x-zip-compressed', 'application/x-rar-compressed', 'image/jpeg', 'image/jpg'],
-          server: {
-              process: "/tmp-upload",
-              headers: {
-                  'X-CSRF-TOKEN': "{{ @csrf_token() }}"
-              }
-          },
-          fileValidateTypeDetectType: (source, type) =>
-              new Promise((resolve, reject) => {
-                  // Do custom MIME type detection here and return with promise
-                  resolve(type);
-              }),
-      });
+        // Set options
+        FilePond.setOptions({
+            acceptedFileTypes: ['image/png', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/x-zip-compressed', 'application/x-rar-compressed', 'image/jpeg', 'image/jpg'],
+            server: {
+                process: {
+                    url: '/tmp-upload',
+                    headers: {
+                        'X-CSRF-TOKEN': "{{ @csrf_token() }}"
+                    }
+                }
+            },
+            fileValidateTypeDetectType: (source, type) =>
+                new Promise((resolve, reject) => {
+                    // Do custom MIME type detection here and return with promise
+                    resolve(type);
+                }),
+        });
 
-      // Get a reference to the file input element
-      const inputElement = document.querySelector('input[name="document"]');
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('input[name="document"]');
 
-      // Create the FilePond instance
-      const pond = FilePond.create(inputElement);
+        // Create the FilePond instance
+        const pond = FilePond.create(inputElement);
 
     </script>
 
