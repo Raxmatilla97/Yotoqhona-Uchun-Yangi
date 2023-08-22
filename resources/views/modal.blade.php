@@ -24,8 +24,8 @@
                 <h2 class="text-xl font-bold mb-4 text-center">Ariza holatini tekshirish</h2>
                 <p>Arizangiz holatini tekshirish uchun sizga berilgan ID raqamni bu yerga yozing.</p>
                 <b class="mt-3">Yuborilgan arizalar soni: @php echo $users = DB::table('applications')->whereNull('deleted_at')->count(); @endphp ta</b>
-                <b class="mt-1">Maqullangan arizalar soni: @php echo $users = DB::table('applications')->where('holat', '=', 'maqullandi')->count(); @endphp ta</b> 
-                <b class="mt-1">Rad etilgan arizalar soni: @php echo $users = DB::table('applications')->where('holat', '=', 'rad_etildi')->count(); @endphp ta</b> 
+                <b class="mt-1">Maqullangan arizalar soni: @php echo $users = DB::table('applications')->where('holat', '=', 'maqullandi')->whereNull('deleted_at')->count(); @endphp ta</b> 
+                <b class="mt-1">Rad etilgan arizalar soni: @php echo $users = DB::table('applications')->where('holat', '=', 'rad_etildi')->whereNull('deleted_at')->count(); @endphp ta</b> 
                 <div class="relative rounded-md shadow-sm mt-1">
                     <div class="absolute inset-y-0 flex  items-center left-0 pl-3">
                        
