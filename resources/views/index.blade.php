@@ -353,7 +353,7 @@
       <div class="mb-7 ml-4">
         <div class="flex items-center">
           <input id="link-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2 ">
-          <label for="link-checkbox"  class="ml-2 text-sm font-medium text-gray-900 ">Barcha ma'lumotlaringiz to'grimi? <a href="#" class="text-blue-600  hover:underline">Qayta tekshirish</a>.</label>
+          <label for="link-checkbox"  class="ml-7 text-sm font-medium text-gray-900 ">Barcha ma'lumotlaringiz to'grimi? <a href="#" class="text-blue-600  hover:underline">Qayta tekshirish</a>.</label>
         </div>
       </div>                    
           <div>
