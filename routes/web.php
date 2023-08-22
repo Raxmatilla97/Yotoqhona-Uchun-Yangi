@@ -63,6 +63,12 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
     |------------------------------------------------------------------------------
     */
 
+     // Talabalardan kelib tushgan arizlalarnini tahrirlash
+     Route::post('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'tahrirlash'])->name('kelgan-arizalarni-tahrirlash');
+
+     // Arizalarni qidirish
+     Route::match(['GET', 'POST'], '/dashboard/arizalarni-qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
+
     // Talabalardan kelib tushgan arizlalarni listi
     Route::get('/dashboard/kelgan-arizalar', [ApplicationController::class, 'index'])->name('kelgan-arizalar');
 
@@ -79,13 +85,7 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
     Route::get('/dashboard/arizani-korish/{id}', [ApplicationController::class, 'arizaniKorish'])->name('arizani-korish'); 
 
     // Talabalardan kelib tushgan arizlalarni ko'rish sahifasi
-    Route::get('/dashboard/kelgan-arizalarni-korish', [ApplicationController::class, 'show'])->name('kelgan-arizalarni-korish');
-
-    // Talabalardan kelib tushgan arizlalarnini tahrirlash
-    Route::post('/dashboard/kelgan-arizalarni-tahrirlash', [ApplicationController::class, 'tahrirlash'])->name('kelgan-arizalarni-tahrirlash');
-
-    // Arizalarni qidirish
-    Route::get('/dashboard/arizalarni-qidirish', [ApplicationController::class, 'arizalarniQidrish'])->name('arizalarni-qidirish');
+    Route::get('/dashboard/kelgan-arizalarni-korish', [ApplicationController::class, 'show'])->name('kelgan-arizalarni-korish');   
 
     // Talabalardan kelib tushgan arizlalarnini o'chirish
     Route::delete('/dashboard/kelgan-arizalarni-ochirish/{id}', [ApplicationController::class, 'destroy'])->name('kelgan-arizalarni-ochirish');
