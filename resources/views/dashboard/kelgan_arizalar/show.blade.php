@@ -254,7 +254,7 @@
                                                                 @elseif($ariza->mezon == 'ijtimoiy_himoya')
                                                                     “Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam <br> ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda <br> axborot tizimiga kiritilgan oilalar hisobga olinadi).
                                                                 @elseif($ariza->mezon == 'uzoq_viloyatdagi_talabalar')
-                                                                    Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)
+                                                                    Uzoq viloyatlardagi talabalar (Toshkent viloyatidan tashqari)
                                                                 @endif                                                           
                                                             </td>
                                                             
