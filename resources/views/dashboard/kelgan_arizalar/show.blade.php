@@ -277,7 +277,7 @@
                                                                 </div>
                                                             </td>
                                                             <td class="px-12 py-4 flex justify-between text-sm font-normal text-gray-700 whitespace-nowrap">
-                                                            <span class="text-[10px]">{{$ariza->document}}</span>
+                                                            {{-- <span class="text-[10px]">{{$ariza->document}}</span> --}}
                                                             <a href="{{url('storage/vaqtincha/tmp', $ariza->document )}}" target="_blank" download>
                                                                 <button type="button" class="inline-flex items-center px-3 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md mx-2">
                                                                         <span>Faylni yuklash</span>                                                           
