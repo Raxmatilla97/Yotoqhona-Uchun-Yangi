@@ -451,7 +451,7 @@
 
       // Set options
       FilePond.setOptions({
-          acceptedFileTypes: ['image/png', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',  'application/x-zip-compressed', 'application/x-rar-compressed'],
+          acceptedFileTypes: ['image/png', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/x-zip-compressed', 'application/x-rar-compressed', 'image/jpeg', 'image/jpg'],
           server: {
               process: "/tmp-upload",
               headers: {
