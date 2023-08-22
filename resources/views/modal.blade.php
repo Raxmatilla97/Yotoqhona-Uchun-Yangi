@@ -34,7 +34,7 @@
                           </svg>
                                                     
                     </div>
-                    <input type="number" name="number_generation" onkeydown="if (event.key === '-' || event.key === ',' || event.key === '+' || event.key === 'E' || event.key === 'e' || event.key === '.') event.preventDefault();" class="mb-5 mt-5 w-full pl-10 rounded-md text-sm @if($errors->has('fish')) border-red-300
+                    <input type="number" required name="number_generation" onkeydown="if (event.key === '-' || event.key === ',' || event.key === '+' || event.key === 'E' || event.key === 'e' || event.key === '.') event.preventDefault();" class="mb-5 mt-5 w-full pl-10 rounded-md text-sm @if($errors->has('fish')) border-red-300
                     focus:border-red-500 focus:ring-red-500 text-red-900 placeholder-red-300 @else border-gray-300 focus:border-green-500 focus:ring-green-500 @endif">
                 </div>
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
