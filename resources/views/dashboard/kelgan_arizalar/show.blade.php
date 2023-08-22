@@ -252,7 +252,7 @@
                                                                 @elseif($ariza->mezon == 'nogironligi_bor')
                                                                     I va II-guruh nogironligi bo‘lgan shaxslar
                                                                 @elseif($ariza->mezon == 'ijtimoiy_himoya')
-                                                                    “Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam <br> ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).
+                                                                    “Ijtimoiy himoya yagona reestri” axborot tizimi (my.gov.uz) orqali kam2 <br> ta’minlangan deb e’tirof etilgan oila farzandlari (Bunda, 2023-yilda axborot tizimiga kiritilgan oilalar hisobga olinadi).
                                                                 @elseif($ariza->mezon == 'uzoq_viloyatdagi_talabalar')
                                                                     Uzoq viloyatlardagi talabalar (Andijon, Farg'ona va Namangan viloyatlaridan tashqari)
                                                                 @endif                                                           
