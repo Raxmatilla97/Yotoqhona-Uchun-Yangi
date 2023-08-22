@@ -91,7 +91,7 @@ class ApplicationController extends Controller
     {
         $data = $request->all();
         $hulosa = ""; // $hulosa o'zgaruvchisini e'lon qilingan joydan o'zgartirdik      
-
+        
         if (is_numeric($data['number_generation'])) {
 
             $application = Application::where('number_generation', $data['number_generation'])->first();        
