@@ -9,8 +9,8 @@
     <title>CHDPU - Yotoqhona uchun ariza berish</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @php
-      $code = request()->query('code');
-      $name = request()->query('name');
+      $code = request('code');
+      $name = request('name');
     @endphp
   </head>
 
