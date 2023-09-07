@@ -33,7 +33,7 @@
                                 
                         <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Ariza joylandi!</span>
                         <p class="block mt-2 pb-4 text-center text-xl font-semibold normal-case text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
-                          {{ request()->query('name') }} See {{session()->has('name')}} <br> sizning arizangiz tez orada ko'rib chiqiladi!
+                          {{ dd(request())}} See  | {{session()->has('code')}}<br> sizning arizangiz tez orada ko'rib chiqiladi!
                         </p>
                         <p class="mt-2 text-md text-gray-600 dark:text-gray-400">
                             Hurmatli talaba siz jo'natgan ariza bizgacha yetib keldi, uni tez kunda ko'rib chiqib bu haqda izoh qoldiramiz, arizangizni holatini tekshirish uchun ID raqamdan foydalanishingiz mumkin. <p class="text-gray-800 text-xl text-center mt-3">ID raqamni esdan chiqarmang!</p>
