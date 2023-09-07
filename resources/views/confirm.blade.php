@@ -24,34 +24,30 @@
             <h2 class="mt-2 sm:mt-6 text-2xl sm:text-3xl font-bold text-gray-900 text-center">CHDPU - Talabalar Turar Joyiga Online Ariza To'ldirish</h2>
         </div>
         <div class="mt-6 bg-white/80 p-4 sm:p-5 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
-<script>
-  // URL manzilidagi query string ni olish
-var queryString = window.location.search;
+          <script>
+          // URL manzilidagi query string ni olish
+          var queryString = window.location.search;
 
-// Query string ni obyektga aylantirish
-var params = new URLSearchParams(queryString);
+          // Query string ni obyektga aylantirish
+          var params = new URLSearchParams(queryString);
 
-// code va name ni olish
-var code = params.get("code");
-var name = params.get("name");
+          // code va name ni olish
+          var code = params.get("code");
+          var name = params.get("name");
 
-// Qiymatlarni ekranga chiqarish
-console.log("Code: " + code);
-console.log("Name: " + name);
-</script>
+          // PHP-ga o'tkazish
+          var url = "/confirm?code=" + encodeURIComponent(code) + "&name=" + encodeURIComponent(name);
+          window.location.href = url;
+          </script>
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <img class="object-cover w-full h-64" src="{{ asset('assets/complite.gif')}}" alt="Article">
             
                 <div class="p-6">
-                    <div>
-                      @php
-                      echo $code = request()->query('code');
-                      echo $name = request()->query('name');
-                      @endphp
+                    <div>                     
                         <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Ariza joylandi!</span>
                         <p class="block mt-2 pb-4 text-center text-xl font-semibold normal-case text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
-                          {{ $name }} <br> sizning arizangiz tez orada ko'rib chiqiladi!
+                          {{ request('name') }} <br> sizning arizangiz tez orada ko'rib chiqiladi!
                         </p>
                         <p class="mt-2 text-md text-gray-600 dark:text-gray-400">
                             Hurmatli talaba siz jo'natgan ariza bizgacha yetib keldi, uni tez kunda ko'rib chiqib bu haqda izoh qoldiramiz, arizangizni holatini tekshirish uchun ID raqamdan foydalanishingiz mumkin. <p class="text-gray-800 text-xl text-center mt-3">ID raqamni esdan chiqarmang!</p>
@@ -59,7 +55,7 @@ console.log("Name: " + name);
                     </div>
 
                     <div class="flex items-center justify-between w-full mt-5 gap-x-2">
-                        <input type="text" onclick="copyText()" id="myInput" disabled value="{{ $code }}" class="flex-1 block h-10 px-4 text-xl text-gray-700 text-center bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                        <input type="text" onclick="copyText()" id="myInput" disabled value="{{ request('code') }}" class="flex-1 block h-10 px-4 text-xl text-gray-700 text-center bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                         
                         <button id="copyBtn"  onclick="copyText()" class="rounded-md hidden sm:block p-1.5 text-gray-700 bg-white border border-gray-200 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
