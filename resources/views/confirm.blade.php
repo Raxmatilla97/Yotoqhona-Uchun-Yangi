@@ -24,7 +24,21 @@
             <h2 class="mt-2 sm:mt-6 text-2xl sm:text-3xl font-bold text-gray-900 text-center">CHDPU - Talabalar Turar Joyiga Online Ariza To'ldirish</h2>
         </div>
         <div class="mt-6 bg-white/80 p-4 sm:p-5 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
+<script>
+  // URL manzilidagi query string ni olish
+var queryString = window.location.search;
 
+// Query string ni obyektga aylantirish
+var params = new URLSearchParams(queryString);
+
+// code va name ni olish
+var code = params.get("code");
+var name = params.get("name");
+
+// Qiymatlarni ekranga chiqarish
+console.log("Code: " + code);
+console.log("Name: " + name);
+</script>
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <img class="object-cover w-full h-64" src="{{ asset('assets/complite.gif')}}" alt="Article">
