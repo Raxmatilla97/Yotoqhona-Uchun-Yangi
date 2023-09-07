@@ -25,7 +25,8 @@
         </div>
         <div class="mt-6 bg-white/80 p-4 sm:p-5 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
           <script>
-         // URL manzilidagi query string ni olish
+      
+// URL manzilidagi query string ni olish
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
@@ -33,9 +34,12 @@ const urlParams = new URLSearchParams(queryString);
 const code = urlParams.get('code');
 const name = urlParams.get('name');
 
-// Redirect qilish
-const redirectUrl = `/confirm?code=${encodeURIComponent(code)}&name=${encodeURIComponent(name)}`;
-window.location.href = redirectUrl;
+// code va name ni HTML-ga chiqarish
+const codeElement = document.getElementById('code');
+const nameElement = document.getElementById('name');
+
+codeElement.textContent = code;
+nameElement.textContent = name;
           </script>
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
