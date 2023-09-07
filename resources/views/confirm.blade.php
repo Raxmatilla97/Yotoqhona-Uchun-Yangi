@@ -44,7 +44,7 @@ nameElement.textContent = name;
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <img class="object-cover w-full h-64" src="{{ asset('assets/complite.gif')}}" alt="Article">
-            
+                <span id="code">{{ request('code') }}</span>
                 <div class="p-6">
                     <div>                     
                         <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Ariza joylandi!</span>
