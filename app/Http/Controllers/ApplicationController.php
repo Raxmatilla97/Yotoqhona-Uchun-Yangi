@@ -60,8 +60,9 @@ class ApplicationController extends Controller
                
         Application::create($validatedData);         
         
-        return redirect(route('confirm-test', ['code' => $code, 'name' => $name,]));
+        // return redirect(route('confirm-test', ['code' => $code, 'name' => $name,]));
         // return view('confirm')->with(['code' => $code, 'name' => $name]);
+        return redirect('/confirm-test?code=' . $code . '&name=' . $name);
 
     }
 

@@ -25,7 +25,7 @@ Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
 
 // Ro'yxatdan o'tganlik haqida habar va ID kod beradigan qism
 Route::get('/confirm-test', function () {
-    return view('confirm');
+    return view('confirm-test');
 })->name('confirm-test');
 
 
