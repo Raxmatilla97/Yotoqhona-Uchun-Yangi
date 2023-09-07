@@ -25,19 +25,17 @@
         </div>
         <div class="mt-6 bg-white/80 p-4 sm:p-5 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
           <script>
-          // URL manzilidagi query string ni olish
-          var queryString = window.location.search;
+         // URL manzilidagi query string ni olish
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
 
-          // Query string ni obyektga aylantirish
-          var params = new URLSearchParams(queryString);
+// code va name ni olish
+const code = urlParams.get('code');
+const name = urlParams.get('name');
 
-          // code va name ni olish
-          var code = params.get("code");
-          var name = params.get("name");
-
-          // PHP-ga o'tkazish
-          var url = "/confirm?code=" + encodeURIComponent(code) + "&name=" + encodeURIComponent(name);
-          window.location.href = url;
+// Redirect qilish
+const redirectUrl = `/confirm?code=${encodeURIComponent(code)}&name=${encodeURIComponent(name)}`;
+window.location.href = redirectUrl;
           </script>
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
