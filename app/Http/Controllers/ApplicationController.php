@@ -60,7 +60,8 @@ class ApplicationController extends Controller
                
         Application::create($validatedData);         
         
-        return redirect(route('confirm', ['code' => $code, 'name' => $name,]));
+        // return redirect(route('confirm', ['code' => $code, 'name' => $name,]));
+        return redirect(route('confirm', compact('code', 'name')));
 
     }
 
