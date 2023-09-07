@@ -8,10 +8,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <title>CHDPU - Yotoqhona uchun ariza berish</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @php
-        $code = Request::query('code');
-        $name = Request::query('name');
-    @endphp
+   
   </head>
 
   <body
@@ -34,6 +31,10 @@
             
                 <div class="p-6">
                     <div>
+                      @php
+                      echo $code = request()->query('code');
+                      echo $name = request()->query('name');
+                      @endphp
                         <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Ariza joylandi!</span>
                         <p class="block mt-2 pb-4 text-center text-xl font-semibold normal-case text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
                           {{ $name }} <br> sizning arizangiz tez orada ko'rib chiqiladi!
