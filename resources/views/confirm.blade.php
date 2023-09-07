@@ -25,28 +25,28 @@
         </div>
         <div class="mt-6 bg-white/80 p-4 sm:p-5 backdrop-blur-xl sm:mt-10 mx-auto rounded-xl shadow-xl w-full max-w-xl">
           <script>
-      
-// URL manzilidagi query string ni olish
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
+      // URL manzilidagi query string ni olish
+var queryString = window.location.search;
+
+// Query string ni obyektga aylantirish
+var params = new URLSearchParams(queryString);
 
 // code va name ni olish
-const code = urlParams.get('code');
-const name = urlParams.get('name');
+var code = params.get("code");
+var name = params.get("name");
 
-// code va name ni HTML-ga chiqarish
-const codeElement = document.getElementById('code');
-const nameElement = document.getElementById('name');
-
-codeElement.textContent = code;
-nameElement.textContent = name;
+// Qiymatlarni HTML-ga chiqarish
+document.getElementById("code").textContent = code;
+document.getElementById("name").textContent = name;
           </script>
           
             <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <img class="object-cover w-full h-64" src="{{ asset('assets/complite.gif')}}" alt="Article">
-                <span id="code">{{ request('code') }}</span>
+            
                 <div class="p-6">
-                    <div>                     
+                    <div>     
+                      <p>Code: <span id="code"></span></p>
+<p>Name: <span id="name"></span></p>                
                         <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Ariza joylandi!</span>
                         <p class="block mt-2 pb-4 text-center text-xl font-semibold normal-case text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link">
                           {{ request('name') }} <br> sizning arizangiz tez orada ko'rib chiqiladi!
