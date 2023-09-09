@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 // Arizalarni yuborish sahifasi
 Route::get('/', [ApplicationController::class, 'arizalarniYuborish'])->name('site');
 
+// Ro'yxatdan o'tganlik haqida habar va ID kod beradigan qism
+Route::get('/confirm', function () {
+    return view('confirm');
+})->name('confirm');
+
 // Talabalardan kelib tushgan arizlalarni listi
 Route::post('/kelgan', [ApplicationController::class, 'store'])->name('kelgan_arizalar_store');
 
@@ -22,11 +27,6 @@ Route::get('/arizani-javobi', function () {
 
 //  Yuklangan fayllarni saqalash routeri
 Route::post('/tmp-upload', [TestController::class, 'tmpUpload']);
-
-// Ro'yxatdan o'tganlik haqida habar va ID kod beradigan qism
-Route::get('/confirm-test', function () {
-    return view('confirm-test');
-})->name('confirm-test');
 
 
 /*
