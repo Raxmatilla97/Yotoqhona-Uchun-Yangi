@@ -49,6 +49,10 @@ class ApplicationController extends Controller
             $code = random_int(1000000, 9999999);
         } while (Application::where('number_generation', $code)->exists());
 
+        $request->validate([
+            'g-recaptcha-response' => 'required|recaptcha',           
+        ]);
+
         $validatedData = $request->validated();
 
         $validatedData['pass_info'] = preg_replace('/[^a-zA-Z0-9]/', '', $request['pass_info']);
